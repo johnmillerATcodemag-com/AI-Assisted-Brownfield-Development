@@ -1,22 +1,51 @@
 ---
 title: "Generate Project Instruction Files"
-description: "Analyzes codebase and generates comprehensive instruction files following GitHub Copilot format"
+description: "Intelligently analyzes codebase and generates comprehensive, technology-specific instruction files following GitHub Copilot format"
 author: "AI Assistant"
-tags: ["instructions", "documentation", "best-practices", "code-generation"]
-version: "1.0.0"
+tags:
+  [
+    "instructions",
+    "documentation",
+    "best-practices",
+    "code-generation",
+    "architecture",
+    "ai-guidance",
+  ]
+version: "2.0.0"
 triggers:
   - "generate instructions"
   - "create instruction files"
   - "analyze codebase for instructions"
   - "setup project guidance"
   - "create coding guidelines"
+  - "generate tech docs"
+  - "create ai guidance"
+  - "setup development standards"
+  - "analyze project structure"
+  - "create technology templates"
 appliesTo:
   - "**"
+  - ".github/instructions/**"
+  - "**/*.md"
+  - "**/README.md"
+  - "**/package.json"
+  - "**/*.csproj"
+  - "**/*.sln"
+requirements:
+  - "Read-only access to codebase"
+  - "File system access for creating new files"
+  - "Understanding of multiple programming languages and frameworks"
+outputs:
+  - "Comprehensive instruction file structure"
+  - "Technology-specific guidance files"
+  - "AI assistant integration guidelines"
 ---
 
 # Generate Project Instruction Files
 
 You are an expert software architect and documentation specialist. Your task is to analyze the current codebase and generate comprehensive instruction files following the GitHub Copilot Instruction File Format.
+
+**IMPORTANT**: Only create NEW instruction files that do not already exist. Never modify or overwrite existing files.
 
 ## Analysis Phase
 
@@ -341,6 +370,7 @@ triggers:
 5. **Consistency**: Ensure all generated instructions follow the same format and style
 6. **Completeness**: Cover all major aspects of development for each detected technology
 7. **Maintainability**: Structure instructions for easy updates and maintenance
+8. **Preserve Existing Files**: **NEVER modify or overwrite existing files** - only create new instruction files that don't already exist
 
 ## Output Format
 
@@ -353,4 +383,22 @@ After analysis, provide a summary of:
 
 Then proceed to generate the instruction files using the established format and detected technologies.
 
-Remember: The goal is to create instruction files that will help AI assistants generate consistent, high-quality code that follows the project's established patterns and best practices.
+## Safety Requirements
+
+**CRITICAL**: Before creating any instruction file:
+
+1. **Check if the file already exists** in the target location
+2. **Skip creation** if a file with the same name already exists
+3. **Only create new files** that don't conflict with existing ones
+4. **Preserve all existing content** - never modify existing instruction files
+
+## File Conflict Resolution
+
+If instruction files already exist:
+
+- Analyze existing files to understand current patterns
+- Use existing files as reference for consistency
+- Only create supplementary files that fill gaps
+- Document any detected inconsistencies but do not modify existing files
+
+Remember: The goal is to create NEW instruction files that will help AI assistants generate consistent, high-quality code that follows the project's established patterns and best practices, while preserving all existing documentation and instructions.
