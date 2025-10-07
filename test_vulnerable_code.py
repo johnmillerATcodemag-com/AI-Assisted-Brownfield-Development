@@ -145,7 +145,7 @@ def execute_user_code(code_string):
 # Example 11: Additional API key patterns
 # NOTE: These are intentionally fake demo credentials for security analysis demonstration
 STRIPE_API_KEY = "fake-stripe-key-1234567890abcdef1234567890abcdef"  # DEMO CREDENTIAL
-AWS_ACCESS_KEY = "FAKE1234567890ABCDEF"  # DEMO CREDENTIAL  
+AWS_ACCESS_KEY = "FAKE1234567890ABCDEF"  # DEMO CREDENTIAL
 JWT_SECRET = "demo-jwt-secret-key-very-long-and-secure-hopefully"  # DEMO CREDENTIAL
 
 class UserAuthentication:
