@@ -1,0 +1,28 @@
+# Security Analysis Requirements
+
+# Core dependencies for security analysis
+PyGithub==1.59.1
+requests==2.31.0
+python-dateutil==2.8.2
+
+# Security scanning tools
+bandit[toml]==1.7.5
+safety==2.3.5
+semgrep==1.50.0
+
+# Code analysis and utilities
+pathlib2==2.3.7
+click==8.1.7
+colorama==0.4.6
+tqdm==4.66.1
+
+# JSON and YAML processing
+pyyaml==6.0.1
+jsonschema==4.20.0
+
+# Regular expressions and text processing
+regex==2023.10.3
+
+# Optional: Enhanced security scanning
+# trufflesecurity==3.0.0  # Uncomment if using TruffleHog
+# checkov==3.0.0          # Uncomment if using Checkov for IaC scanning
