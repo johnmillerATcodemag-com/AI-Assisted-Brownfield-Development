@@ -6,6 +6,8 @@ This repo was created for the 2025 Next Gen AI Conference Leveraging AI for Lega
 
 #file:check-context.prompt.md apply this prompt to files in the .github/instructions folder
 
+Update the readme.md file with current state of the application. Include mermaid C4 diagrams.
+
 #codebase analyze the code and report any deviations from the instructions in the .github/instructions folder
 
 Looking at the current #codebase, what tests are need and missing?
@@ -15,6 +17,8 @@ Looking at the current #codebase, what tests are need and missing in order to ve
 Looking at the current #codebase, what needs refactoring?
 
 Looking at the current #codebase, what are security concerns? Create issues from your findings.
+
+Analyze the #codebase and report any dead code you find
 
 Analyze the files in the .github/instructions folder and report where they no longer represent best practices
 
