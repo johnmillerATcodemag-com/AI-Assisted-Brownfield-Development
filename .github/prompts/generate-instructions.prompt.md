@@ -1,36 +1,8 @@
 ---
-title: "Generate Project Instruction Files"
 description: "Analyzes codebase and generates comprehensive instruction files following GitHub Copilot format"
-author: "AI Assistant"
-tags: ["instructions", "documentation", "best-practices", "code-generation"]
-version: "1.0.0"
-triggers:
-  - "generate instructions"
-  - "create instruction files"
-  - "analyze codebase for instructions"
-  - "setup project guidance"
-  - "create coding guidelines"
-  - "generate tech docs"
-  - "create ai guidance"
-  - "setup development standards"
-  - "analyze project structure"
-  - "create technology templates"
-appliesTo:
-  - "**"
-  - ".github/instructions/**"
-  - "**/*.md"
-  - "**/README.md"
-  - "**/package.json"
-  - "**/*.csproj"
-  - "**/*.sln"
-requirements:
-  - "Read-only access to codebase"
-  - "File system access for creating new files"
-  - "Understanding of multiple programming languages and frameworks"
-outputs:
-  - "Comprehensive instruction file structure"
-  - "Technology-specific guidance files"
-  - "AI assistant integration guidelines"
+model: Auto (copilot)
+tools: ['search', 'edit', 'fetch']
+mode: agent
 ---
 
 # Generate Project Instruction Files
@@ -69,11 +41,9 @@ First, analyze the codebase to identify:
 
 ## Instruction File Generation
 
-Generate instruction files in the `.github/instructions/` directory with the following structure:
+Generate instruction files in the `.github/instructions/generated` directory with the following structure:
 
 ### General Instructions (Root Level)
-
-Create these files in `.github/instructions/`:
 
 #### 1. README.md
 
@@ -541,7 +511,7 @@ For each detected technology, create a subdirectory with specific instructions:
 
 #### For .NET/C# Projects
 
-If .NET/C# files are detected, create appropriate folders:
+If .NET/C# files are detected, create appropriate folders under the `.github/instructions/generated` directory:
 
 Create `csharp/` folder with essential files:
 
