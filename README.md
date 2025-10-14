@@ -20,7 +20,7 @@ This repo was created for the 2025 Next Gen AI Conference Leveraging AI for Lega
 
 [x] Analyze the #codebase and create github issues for any dead code you find
 
-[ ] Analyze the files in the .github/instructions folder and report where they no longer represent best practices
+[x] Analyze the files in the .github/instructions folder and report where they no longer represent best practices
 
 [ ] #codebase analyze the code and report any deviations from the instructions in the .github/instructions folder
 
