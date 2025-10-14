@@ -1,6 +1,17 @@
+---
+description: "Analyzes instruction files in the .github/instrustion folder and report any conflicts or inconsistencies"
+model: Auto (copilot)
+tools: ['search', 'edit', 'fetch']
+mode: agent
+---
+
 # Context Analysis and Conflict Detection
 
-Please perform a comprehensive analysis of the provided context and identify any issues or inconsistencies. Examine the following areas:
+Please perform a comprehensive analysis of the provided context and identify any issues or inconsistencies.
+
+Only focus on detecting conflicts, contradictions, or inconsistencies within the context.
+
+Examine the following areas:
 
 ## 1. Conflicting Instructions
 
