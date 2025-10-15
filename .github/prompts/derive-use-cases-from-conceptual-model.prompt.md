@@ -1,8 +1,11 @@
 ---
+mode: agent
+model: Auto (copilot)
+tools: ["search", "read", "create"]
+description: Derive use cases from conceptual model by automatically locating and reading the ORM model file from Model/orm/, then generating one Markdown file per use case under Model/use-cases, plus an index file
 prompt_metadata:
   id: derive-use-cases-from-academia
   title: Generate Use Cases from conceptual model (ORM rules)
-  description: Derive use cases from conceptual model by automatically locating and reading the ORM model file from Model/orm/, then generating one Markdown file per use case under Model/use-cases, plus an index file.
   owner: johnmillerATcodemag-com
   repository: AI-Assisted-Brownfield-Development
   version: 1.1.0

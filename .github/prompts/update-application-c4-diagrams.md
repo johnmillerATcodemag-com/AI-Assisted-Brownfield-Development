@@ -1,4 +1,9 @@
 ---
+mode: agent
+model: Auto (copilot)
+tools: ["search", "edit", "create"]
+description: "Update application documentation to include current-state details and Mermaid C4 diagrams"
+
 # This frontmatter supports the create-issue workflow parser
 # title/labels/assignees/milestone are optional; edit as needed after creation
 # You can run the workflow with this file via the "Create Issue From Prompt" action

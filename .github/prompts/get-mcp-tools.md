@@ -1,3 +1,10 @@
+---
+mode: agent
+model: Auto (copilot)
+tools: ["mcp_azure", "mcp_microsoft_doc"]
+description: "Visualize and explore available MCP (Model Context Protocol) server tools and capabilities"
+---
+
 ```mermaid
 graph TD
     A[MCP Server - Azure] --> B[Tool: list_resource_groups]
