@@ -1,8 +1,11 @@
 ---
+mode: agent
+model: Auto (copilot)
+tools: ["edit", "create"]
+description: Generates a Markdown authoring guide for creating instruction files with recommended sections, placement, naming, and a validation checklist
 prompt_metadata:
   id: create-instruction-file-instructions
   title: Generate Instruction-File Authoring Instructions (Markdown)
-  description: Generates a Markdown authoring guide for creating instruction files with recommended sections, placement, naming, and a validation checklist.
   owner: johnmillerATcodemag-com
   repository: zeus.academia.3
   version: 1.0.0

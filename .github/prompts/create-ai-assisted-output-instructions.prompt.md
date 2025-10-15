@@ -1,8 +1,11 @@
 ---
+mode: agent
+model: Auto (copilot)
+tools: ["edit", "create"]
+description: Generates repository guidelines for AI-assisted outputs, including provenance metadata requirements and an AI chat logging workflow
 prompt_metadata:
   id: create-ai-assisted-output-instructions
   title: Generate AI-Assisted Output Instructions (Markdown)
-  description: Generates repository guidelines for AI-assisted outputs, including provenance metadata requirements and an AI chat logging workflow.
   owner: johnmillerATcodemag-com
   repository: zeus.academia.3
   version: 1.0.0
@@ -23,7 +26,7 @@ You are an expert technical writer. Create a clear, actionable instruction file 
 - Create or overwrite the file at: `.github/instructions/ai-assisted-output.instructions.md`.
 - Format strictly as Markdown with headings and lists.
 - Include a short introduction on why provenance and logging matter.
-- Provide a table of contents matching the current structure.
+- Provide a table of contents matching the current structure (include all top-level headings, including "Overview").
 - Include a "Before You Start (Mandatory)" section that emphasizes automatic Copilot chat management with specific implementation details for Copilot.
 - In the AI chat logging workflow, emphasize Copilot-integrated chat management as the preferred approach with automatic scaffolding.
 - Update the conversation.md template to include a "Context" section (Inputs, Targets, Constraints) and require listing "Artifacts produced" and "Next steps" when closing a work burst.
@@ -31,6 +34,9 @@ You are an expert technical writer. Create a clear, actionable instruction file 
 - Add a "PR and Commit Checklist (Mandatory)" section with checkboxes.
 - Add "GitHub Copilot Implementation Requirements" section with technical specifications including TypeScript interfaces, error handling, and integration points.
 - Include "Non-Compliance and Remediation" section.
+- Ensure consistent terminology: use "chat ID" in prose and `chat_id` in metadata/front matter; do not use "session" or "session-id" in paths or labels. All examples and paths should standardize on `<chat-id>`.
+- Include an "Enforcement (CI)" subsection with a minimal GitHub Actions example (or clear steps) that blocks PRs when AI artifacts are missing `ai_log` or when the referenced log path does not exist. Add a note about bash compatibility and alternatives for Windows/other platforms. Clarify that the example validates Markdown files and suggest extending to other file types.
+- State the sidecar prohibition once in a canonical "Metadata placement policy" section and use brief cross-references with inline context (e.g., "For non-embeddable formats, use sidecar files - see Metadata placement policy") to balance brevity with clarity.
 
 ## Audience
 
@@ -44,6 +50,7 @@ You are an expert technical writer. Create a clear, actionable instruction file 
 - Require updating the top-level README.md with a brief entry whenever this process generates a new file (what it is, where it lives, and a one-line purpose), including a link to the new artifact.
 - Provide enforcement patterns that make session scaffolding a prerequisite and block PRs until ai-logs linkage exists.
 - Include specific "Before You Start" requirements that emphasize automatic chat management, context-aware logging, and artifact protection.
+- Address bootstrap scenarios: how the policy applies to legacy artifacts created before adoption, and whether policy/instruction files themselves require AI provenance metadata when manually authored.
 
 ## Required provenance metadata (for every AI-assisted artifact)
 
@@ -62,6 +69,8 @@ Authors must attach or embed the following metadata near the top of the artifact
 - Source Conversation Log: <relative path to AI log file>
 
 If the artifact cannot embed front matter, create a sidecar file named `<artifact>.meta.md` with the above content.
+
+**Note**: In YAML front matter, use the boolean value `true` for `ai_generated` rather than the string "Yes". The list above shows conceptual fields; adapt the format to match YAML conventions when embedding.
 
 ## Before You Start (Mandatory) Section Requirements
 
@@ -146,10 +155,10 @@ artifact_protection: true # Prevent creation without chat context
 
 ### conversation.md Template
 
-`````markdown
+````markdown
 # AI Conversation Log
 
-- chat ID: <uuid or slug>
+- Chat ID: <uuid or slug>
 - Operator: <name>
 - Model: <provider>/<model>@<version>
 - Started: <ISO8601>
@@ -166,13 +175,13 @@ artifact_protection: true # Prevent creation without chat context
 
 ### Exchange 1
 
-**[<timestamp>] USER**
+[<timestamp>] USER
 
-````text
+```text
 <prompt text>
 ```
 
-**[<timestamp>] AI**
+[<timestamp>] AI
 
 ```text
 <response excerpt or full>
@@ -198,8 +207,8 @@ artifact_protection: true # Prevent creation without chat context
 
 - <task>: <hh:mm:ss>
 - Total: <hh:mm:ss>
+
 ````
-`````
 
 ## Provenance template for non-Markdown artifacts
 
@@ -222,7 +231,8 @@ When front matter isn’t applicable (e.g., images, binaries), create a sidecar:
 - Source Conversation Log: <relative path>
 
 Note: Do not create sidecars for Markdown (or other formats that support embedded front matter); embed YAML front matter instead.
-```
+````
+````
 
 ## Capturing task durations
 
@@ -233,9 +243,11 @@ Note: Do not create sidecars for Markdown (or other formats that support embedde
 ## Placement and naming
 
 - Place `ai-assisted-output.instructions.md` in `.github/instructions`.
-- Place logs in `ai-logs/yyyy/mm/dd/<session-id>/`.
+- Place logs in `ai-logs/yyyy/mm/dd/<chat-id>/`.
 - Prefer lowercase for artifact filenames; include context (e.g., `uc-001-enrollment-diagram.md`).
-- When creating any new AI-assisted artifact, add a short bullet to the project `README.md` that links to the artifact and states its purpose. If a section like "AI-Assisted Artifacts" exists, add to it; otherwise, create one.
+- **Notable artifacts** (documentation, architecture diagrams, major code modules, or any output intended for long-term reference) require README.md updates. When creating any new AI-assisted notable artifact, add a short bullet to the project `README.md` that links to the artifact and states its purpose. If a section like "AI-Assisted Artifacts" exists, add to it; otherwise, create one.
+- Where appropriate, include a link from the README entry to the corresponding `ai_log` (chat folder) to improve traceability.
+- Temporary or intermediate artifacts (e.g., draft notes, exploration scripts) do not require README entries but must still include full provenance metadata.
 
 ## Example Implementation
 
@@ -274,7 +286,7 @@ This document describes the complete user registration process...
 ```markdown
 # AI Conversation Log
 
-- chat ID: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+- Chat ID: a1b2c3d4-e5f6-7890-abcd-ef1234567890
 - Operator: john-doe
 - Model: openai/gpt-4@2024-05-13
 - Started: 2024-10-15T14:30:00Z
@@ -287,6 +299,8 @@ This document describes the complete user registration process...
 - Targets: user-registration-flow-diagram.md
 - Constraints/Policies: .github/instructions/ai-assisted-output.instructions.md
 ```
+
+Note: Use "Chat ID:" (capitalized) in conversation log field labels, and "chat ID" (lowercase) in running prose.
 
 ## Quality Checklist
 
@@ -310,18 +324,20 @@ Before committing AI-assisted content, verify:
 
 Before submitting pull requests containing AI-assisted content:
 
-- [ ] **Session link verified**: Confirm `ai-logs/yyyy/mm/dd/<chat-id>/conversation.md` exists
+- [ ] **Chat log verified**: Confirm `ai-logs/yyyy/mm/dd/<chat-id>/conversation.md` exists
 - [ ] **Artifact metadata complete**: Each artifact includes `ai_log` reference
 - [ ] **README.md updated**: New artifacts documented with links and descriptions
-- [ ] **No orphaned artifacts**: All AI-generated content traces back to a logged session
+- [ ] **No orphaned artifacts**: All AI-generated content traces back to a logged chat
 - [ ] **Metadata format correct**: Embedded YAML for supported formats, sidecars only for binaries
 - [ ] **Sensitive data check**: No credentials, keys, or private information in logs
+
+Note: For detailed technical requirements on automatic chat management and metadata injection, see the "GitHub Copilot Implementation Requirements" section.
 
 ## GitHub Copilot Implementation Requirements
 
 **For Copilot Integration**: This section defines the expected behavior for GitHub Copilot to automatically handle AI chat management and provenance tracking.
 
-### Chat lifecycle Management
+### Chat Lifecycle Management
 
 **Chat Initialization**:
 
@@ -334,11 +350,17 @@ interface CopilotChat {
   conversationHistory: ChatMessage[];
   artifactsCreated: string[]; // Paths to generated files
 }
+
+type ChatMessage = {
+  role: "user" | "assistant";
+  content: string;
+  timestamp: string; // ISO8601
+};
 ```
 
 **Automatic Behaviors**:
 
-1. **chat IDentity**: Use Copilot's chat ID as the chat IDentifier (no separate ID needed)
+1. **Chat Identity**: Use Copilot's chat ID as the identifier (no separate ID needed)
 2. **Context Persistence**: Maintain chat context throughout conversation lifecycle
 3. **Lazy Scaffolding**: Create `ai-logs/yyyy/mm/dd/<chat-id>/` structure only when first artifact is generated
 4. **Conversation Export**: Auto-save chat transcript to `conversation.md` on artifact creation
@@ -352,10 +374,14 @@ interface CopilotChat {
 ```typescript
 function validateChatContext(): boolean {
   if (!currentChat?.chatId) {
-    showError("Cannot create artifacts without active chat");
+    displayError("Cannot create artifacts without active chat");
     return false;
   }
   return true;
+}
+
+function displayError(message: string): void {
+  // Implementation-specific: surface in VS Code notifications and logs
 }
 ```
 
@@ -370,14 +396,14 @@ function validateChatContext(): boolean {
 
 ### Error Handling
 
-**No active chat**:
+**No Active Chat**:
 
 ```
 ❌ Cannot create AI-generated artifacts without an active chat.
 💡 Please start a new Copilot chat or continue an existing conversation to generate files.
 ```
 
-**chat context Lost**:
+**Chat Context Lost**:
 
 ```
 ⚠️ Chat chat context appears to be lost.
@@ -395,23 +421,23 @@ function validateChatContext(): boolean {
 
 **VS Code Extension**:
 
-- Hook into chat chat lifecycle events
+- Hook into chat lifecycle events
 - Monitor file creation operations
 - Inject metadata during file generation
 - Maintain session state across editor restarts
 
 **API Requirements**:
 
-- Access to chat chat IDentifiers
+- Access to chat identifiers
 - Ability to intercept file creation
 - Conversation history export capabilities
 - User/operator identification methods
 
-### chat ID Clarification
+### Chat ID Clarification
 
 **Single Identifier Approach**: In the Copilot-integrated workflow, we use **only one identifier**:
 
-- **Chat ID = chat ID**: Copilot's native chat identifier serves as the chat ID
+- **Chat ID = Chat ID**: Copilot's native chat identifier serves as the chat ID
 - **No Dual IDs**: We don't need separate `chat_session_id` and `session_id` fields
 - **Simplified Metadata**: All artifacts reference the same chat ID consistently
 - **Unified Logging**: The `ai-logs/yyyy/mm/dd/<chat-id>/` structure uses the chat ID directly
@@ -425,10 +451,55 @@ function validateChatContext(): boolean {
 
 This approach eliminates manual chat management while ensuring 100% provenance coverage for AI-generated artifacts.
 
+### Enforcement (CI)
+
+Include a minimal CI enforcement pattern to block PRs until provenance is complete. For example, a GitHub Actions job that fails when:
+
+- Any changed Markdown file contains `ai_generated: true` but is missing `ai_log` or `chat_id` in front matter
+- The `ai_log` path does not exist relative to the repository
+
+Provide either a YAML snippet or clear validation steps so teams can adopt this quickly.
+
+**Important**: Add a note after the YAML example stating: "This example uses bash and is compatible with Linux/macOS runners. For Windows runners, adapt the script to PowerShell or use WSL. For non-GitHub CI systems, apply equivalent logic in your platform's scripting language."
+
+Also clarify that:
+
+- The provided example validates Markdown files with YAML front matter as a starting point
+- Teams should extend the workflow to validate other file types (Python, JavaScript, etc.) using appropriate parsers for comment-based metadata
+- README updates are typically verified during PR review rather than automated CI checks, though teams may extend the CI script to detect new AI-generated files and verify corresponding README entries if desired
+
 ## Non-Compliance and Remediation
 
-- If missing logs or references, scaffold `ai-logs/`, add front matter `ai_log`, update README; then re-request review.
+- If missing logs or references, scaffold `ai-logs/` with `yyyy/mm/dd/<chat-id>/`, add front matter `ai_log` and `chat_id`, update README (and optionally link back to the session), then re-request review.
+- For orphaned artifacts, create or reconstruct `conversation.md` from available history and update artifacts to reference it.
+- For incomplete metadata, add missing required fields, timestamps, and task durations; verify operator and model details.
 
 ## Deliverable
 
-Output only the final Markdown content for `.github/instructions/ai-assisted-output.instructions.md`. Do not include commentary outside the document.
+Generate the complete `.github/instructions/ai-assisted-output.instructions.md` file with:
+
+### Required AI Provenance Metadata (YAML Front Matter)
+
+The file MUST begin with the following YAML front matter fields per `.github/instructions/ai-assisted-output.instructions.md`:
+
+```yaml
+---
+ai_generated: true
+model: "<model-name-and-version>"
+operator: "<operator-username>"
+chat_id: "<chat-identifier>"
+prompt: |
+  <exact-prompt-text-from-this-execution>
+started: "<ISO8601-timestamp>"
+ended: "<ISO8601-timestamp>"
+task_durations:
+  - task: "<task-name>"
+    duration: "<hh:mm:ss>"
+total_duration: "<hh:mm:ss>"
+ai_log: "ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md"
+---
+```
+
+### Content Requirements
+
+Following the metadata, include the final Markdown content for `.github/instructions/ai-assisted-output.instructions.md` with all sections and requirements specified above. Do not include commentary outside the document.

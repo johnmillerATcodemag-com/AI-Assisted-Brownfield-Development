@@ -1,8 +1,11 @@
 ---
+mode: agent
+model: Auto (copilot)
+tools: ["edit", "create"]
+description: Generates a Markdown authoring guide for creating use cases with a standard structure and Mermaid diagram guidance
 prompt_metadata:
   id: create-use-case-instructions
   title: Generate Use Case Authoring Instructions (Markdown)
-  description: Generates a Markdown authoring guide for creating use cases with a standard structure and Mermaid diagram guidance.
   owner: johnmillerATcodemag-com
   repository: zeus.academia.3
   version: 1.0.0
@@ -215,3 +218,34 @@ Provide a short, realistic example filled in using the template. Choose a generi
 - Is self-contained and immediately actionable for authors.
 - Renders correctly as Markdown without external assets.
 - Uses clear headings matching the structure above.
+
+## Deliverable
+
+Generate the complete `.github/instructions/create-use-case.instructions.md` file with:
+
+### Required AI Provenance Metadata (YAML Front Matter)
+
+The file MUST begin with the following YAML front matter fields per `.github/instructions/ai-assisted-output.instructions.md`:
+
+```yaml
+---
+ai_generated: true
+model: "<model-name-and-version>"
+operator: "<operator-username>"
+chat_id: "<chat-identifier>"
+prompt: |
+  <exact-prompt-text-from-this-execution>
+started: "<ISO8601-timestamp>"
+ended: "<ISO8601-timestamp>"
+task_durations:
+  - task: "<task-name>"
+    duration: "<hh:mm:ss>"
+total_duration: "<hh:mm:ss>"
+ai_log: "ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md"
+applyTo: "Model/use-cases/*.md"
+---
+```
+
+### Content Requirements
+
+Following the metadata, output only the final `.github/instructions/create-use-case.instructions.md` content as Markdown. Do not include any additional commentary, wrapper text, or code fences around the whole file.
