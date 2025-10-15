@@ -31,3 +31,24 @@ This repo was created for the 2025 Next Gen AI Conference Leveraging AI for Lega
 [ ] Add comprehensive error logging architecture
 
 [ ] The two branches sonnet4 and gpt5 contain implementations of the comprehensive error logging architecture. The gpt5 implementation is in commit aafed869e3c243b758d7a89cf29f19fa70c41f8a. The sonnet4 implementation is in commit fed7e9e927e458fa95f30ef91a3bbfcb201e20ea. Review each implementation and report the pros and cons of each.
+
+## AI-Assisted Artifacts & Provenance
+
+This repository enforces provenance and logging for any AI-assisted outputs (code, docs, diagrams, tests, data).
+
+### Guidance & Instructions
+
+- [`.github/instructions/ai-assisted-output.instructions.md`](.github/instructions/ai-assisted-output.instructions.md) — How to generate AI-assisted outputs with required metadata, logging, and CI enforcement
+- [`.github/instructions/create-prompt.instructions.md`](.github/instructions/create-prompt.instructions.md) — Comprehensive guidelines for authoring effective repository prompts ([chat log](ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md))
+- [`.github/instructions/instruction-prompt-requirements.instructions.md`](.github/instructions/instruction-prompt-requirements.instructions.md) — Requirements for prompts that generate instruction files ([chat log](ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md))
+
+### Meta-Prompts (Prompt Generators)
+
+- [`.github/prompts/meta/create-instruction-prompt.prompt.md`](.github/prompts/meta/create-instruction-prompt.prompt.md) — Generates new instruction-generating prompts with AI provenance built-in ([chat log](ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md))
+
+### Notable Artifacts
+
+- **Prompt Authoring Instructions** ([`.github/instructions/create-prompt.instructions.md`](.github/instructions/create-prompt.instructions.md))
+  - Comprehensive guidelines for creating effective, well-structured repository prompts
+  - Generated from: [`.github/prompts/create-prompt-instructions.prompt.md`](.github/prompts/create-prompt-instructions.prompt.md)
+  - Provenance: [Chat log](ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md)
