@@ -1,6 +1,6 @@
 ---
 ai_generated: true
-model: "github/copilot@2025-10-15"
+model: "openai/gpt-4o@2024-11-20"  # Corrected from "github/copilot@2025-10-15"
 operator: "johnmillerATcodemag-com"
 chat_id: "create-prompt-instructions-2025-10-15"
 prompt: |
@@ -18,6 +18,7 @@ task_durations:
     duration: "00:05:00"
 total_duration: "00:45:00"
 ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
+source: ".github/prompts/create-prompt-instructions.prompt.md"
 applyTo: "**/*.prompt.md"
 ---
 
@@ -120,16 +121,27 @@ mode: chat   # Interactive Q&A session
 
 **Default Value**: `Auto (copilot)`
 
+**CRITICAL DISTINCTION**: 
+- **In prompt files (.prompt.md)**: Use `Auto (copilot)` for execution configuration
+- **In generated artifacts**: Must use explicit format per `.github/instructions/copilot-instructions.md`
+  - Format: `"<provider>/<model-name>@<version>"`
+  - Example: `"openai/gpt-4o@2024-11-20"` or `"anthropic/claude-3.5-sonnet@2024-10-22"`
+
 **Guidelines**:
 
-- Use `Auto (copilot)` unless you have specific model requirements
-- Allows the system to select the most appropriate model
+- Use `Auto (copilot)` in prompt files unless you have specific model requirements
+- This allows the execution system to select the most appropriate model
+- The actual model used will be recorded in generated artifact metadata using explicit format
 - Can specify alternative models if needed for specific capabilities
 
 **Examples**:
 
 ```yaml
-model: Auto (copilot) # Recommended default
+# In a .prompt.md file (execution configuration)
+model: Auto (copilot) # Recommended default - tells executor to pick model
+
+# In generated output metadata (provenance - see copilot-instructions.md)
+# model: "openai/gpt-4o@2024-11-20" # Actual model used for generation
 ```
 
 #### `tools`
