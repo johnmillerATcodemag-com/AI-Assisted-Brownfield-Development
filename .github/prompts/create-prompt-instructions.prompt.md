@@ -1,6 +1,6 @@
 ---
 ai_generated: true
-model: "github/copilot@2025-10-15"
+model: "openai/gpt-4o@2024-11-20"
 operator: "johnmillerATcodemag-com"
 chat_id: "create-prompt-instructions-2025-10-15"
 prompt: |
@@ -15,6 +15,7 @@ task_durations:
     duration: "00:05:00"
 total_duration: "00:15:00"
 ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
+source: "johnmillerATcodemag-com"
 mode: agent
 model: Auto (copilot)
 tools: ["create"]
@@ -42,6 +43,13 @@ Create comprehensive Markdown authoring guidelines that help developers and prom
 You are tasked with creating detailed instructions for authoring prompt files within this repository. These instructions will serve as the definitive guide for creating consistent, high-quality prompts that follow the Repository Prompt File Standards.
 
 **CRITICAL**: All AI-generated artifacts in this repository MUST comply with `.github/instructions/ai-assisted-output.instructions.md`. The generated instruction file MUST include full AI provenance metadata as specified in that policy.
+
+**Important**: Follow [`.github/instructions/copilot-instructions.md`](.github/instructions/copilot-instructions.md) for:
+
+- Model format requirements (use underlying model, not interface)
+- Conversation logging format (use GitHub username, not "USER")
+- Post-creation requirements (update AI logs, summary, README)
+- Quality checklist and common mistakes to avoid
 
 ## Target Audience
 
@@ -215,7 +223,7 @@ The file MUST begin with the following YAML front matter fields per `.github/ins
 ```yaml
 ---
 ai_generated: true
-model: "<model-name-and-version>"
+model: "<provider>/<model-name>@<version>" # e.g., "openai/gpt-4o@2024-11-20" or "anthropic/claude-3.5-sonnet@2024-10-22"
 operator: "<operator-username>"
 chat_id: "<chat-identifier>"
 prompt: |
@@ -227,9 +235,12 @@ task_durations:
     duration: "<hh:mm:ss>"
 total_duration: "<hh:mm:ss>"
 ai_log: "ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md"
+source: ".github/prompts/create-prompt-instructions.prompt.md"
 applyTo: "**/*.prompt.md"
 ---
 ```
+
+**Important**: Use the underlying AI model (e.g., `"openai/gpt-4o@2024-11-20"`), not the interface (e.g., "github/copilot").
 
 ### Content Requirements
 

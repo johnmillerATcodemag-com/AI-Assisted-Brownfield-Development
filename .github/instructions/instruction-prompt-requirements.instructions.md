@@ -1,6 +1,6 @@
 ---
 ai_generated: true
-model: "github/copilot@2025-10-15"
+model: "openai/gpt-4o@2024-11-20"
 operator: "johnmillerATcodemag-com"
 chat_id: "create-prompt-instructions-2025-10-15"
 prompt: |
@@ -21,6 +21,8 @@ applyTo: "**/*.instructions.prompt.md"
 # Instruction Prompt Requirements
 
 This file provides mandatory requirements for all prompt files that generate instruction files (i.e., prompts that create `*.instructions.md` files).
+
+**Important**: Follow [`.github/instructions/copilot-instructions.md`](.github/instructions/copilot-instructions.md) for model format, conversation logging, and quality requirements.
 
 ## Applies To
 
