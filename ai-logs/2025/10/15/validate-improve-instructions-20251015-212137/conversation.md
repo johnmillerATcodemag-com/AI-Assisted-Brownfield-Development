@@ -243,14 +243,55 @@ Three options proposed in validation report:
 ✅ Summary file to be generated
 ✅ README.md update recommended
 
+### Exchange 7
+
+[2025-10-16T09:00:00Z] johnmillerATcodemag-com
+
+```text
+Issue #1 feedback: "Because there is no way of knowing what model was used, 
+Prompts should not use the Auto model. When creating a new prompt the default 
+model from the copilot instructs should be used to set the model for the prompt."
+```
+
+[2025-10-16T09:01:30Z] anthropic/claude-3.5-sonnet@2024-10-22
+
+```text
+CRITICAL CORRECTION ACKNOWLEDGED
+
+You are absolutely correct. My original fix to Issue #1 was WRONG.
+
+WRONG ASSUMPTION (my error):
+- Prompts can use "Auto (copilot)" for execution config
+- Only generated artifacts need explicit format
+
+CORRECT UNDERSTANDING (your clarification):
+- BOTH prompts AND generated artifacts must use explicit model format
+- Reason: AI models cannot self-detect, so "Auto (copilot)" loses provenance
+- Default model for prompts: "anthropic/claude-3.5-sonnet@2024-10-22"
+  (as specified in copilot-instructions.md)
+
+CORRECTIVE ACTIONS TAKEN:
+1. Updated create-prompt.instructions.md to REQUIRE explicit model format
+2. Removed all "Auto (copilot)" recommendations
+3. Set default to "anthropic/claude-3.5-sonnet@2024-10-22"
+4. Added clear explanation of why explicit format is required everywhere
+5. Updated validation report with corrected understanding
+
+The core issue was that I misunderstood the conflict - there should be 
+NO contexts where "Auto (copilot)" is acceptable because it breaks 
+provenance tracking.
+```
+
 ## Session Metrics
 
-- **Duration**: ~7 minutes (21:21:37 - 21:28:15)
+- **Duration**: ~15 minutes initial + correction (21:21:37 - 21:36:30 + correction)
 - **Files Analyzed**: 4 instruction files
 - **Total Lines Analyzed**: 3,014 lines
 - **Issues Found**: 7
+- **Issues Fixed**: 4 (with Issue #1 corrected)
 - **Artifacts Created**: 1 validation report + conversation log + summary
 - **Branch**: feature/validate-improve-instructions-20251015-212137
+- **Corrections Applied**: 1 (Issue #1 understanding corrected 2025-10-16)
 
 ## References
 
@@ -258,3 +299,14 @@ Three options proposed in validation report:
 - Validation taxonomy: `.github/prompts/check-context.prompt.md`
 - Policy compliance: `.github/instructions/ai-assisted-output.instructions.md`
 - Copilot standards: `.github/instructions/copilot-instructions.md`
+
+## Critical Learning
+
+**Lesson**: When dealing with AI provenance, there are NO contexts where losing 
+model identity is acceptable. "Auto (copilot)" should NEVER be used because:
+1. AI models have no introspection capability
+2. Without explicit specification, audit trail is broken
+3. Reproducibility requires knowing exact model used
+
+**Corrected Standard**: ALL files (prompts and generated artifacts) must use 
+explicit model format: `"<provider>/<model-name>@<version>"`

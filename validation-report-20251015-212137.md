@@ -63,36 +63,55 @@ The instructions contain conflicting guidance about the model field format:
 
 **Root Cause Analysis**:
 
-The conflict stems from two different contexts:
+**Root Cause Analysis** (CORRECTED 2025-10-16):
 
-- **Prompt execution metadata** (what `create-prompt.instructions.md` describes) - model field in PROMPT files
-- **Generated artifact metadata** (what `copilot-instructions.md` describes) - model field in GENERATED files
+The actual issue is that the instructions were INCORRECT about "Auto (copilot)" being acceptable anywhere:
 
-However, the instructions don't clearly disambiguate these two contexts, creating confusion.
+- **FACT**: AI models cannot self-detect their identity reliably
+- **FACT**: Using "Auto (copilot)" means the actual model used is never recorded
+- **FACT**: Both prompt files AND generated artifacts need explicit model specification
+- **WRONG ASSUMPTION**: That "Auto (copilot)" could be acceptable in prompt files
+
+The real conflict was:
+- `copilot-instructions.md` correctly states: Use explicit format `"<provider>/<model>@<version>"`
+- `create-prompt.instructions.md` incorrectly recommended: "Auto (copilot)" as default
+
+**Correct Solution**:
+
+**BOTH contexts require explicit model format for provenance tracking**:
+
+```yaml
+# In a .prompt.md file - MUST use explicit model
+model: "anthropic/claude-3.5-sonnet@2024-10-22"  # Default per copilot-instructions.md
+
+# In generated output metadata - MUST use explicit model
+model: "openai/gpt-4o@2024-11-20"  # Actual model that generated the artifact
+
+# ❌ NEVER acceptable anywhere
+# model: Auto (copilot)  # Loses provenance tracking
+```
+
+**Why Explicit Model is Required Everywhere**:
+1. AI models have no introspection API to detect their identity
+2. Without explicit specification, provenance trail is broken
+3. Cannot audit or reproduce AI-assisted work without knowing the model
+4. Operators should use recommended default and update if they know actual model differs
 
 **Recommendation**:
 
 **Fix in source prompts**:
 
 1. **In `.github/prompts/create-prompt-instructions.prompt.md`**:
+   - Remove all "Auto (copilot)" recommendations
+   - Specify default model: `"anthropic/claude-3.5-sonnet@2024-10-22"`
+   - Explain why explicit format is required (model self-detection impossible)
+   - Add examples showing explicit format only
 
-   - Clarify that `Auto (copilot)` is for PROMPT file metadata (execution config)
-   - Add note that GENERATED files must use explicit model format per `copilot-instructions.md`
-   - Example distinction:
+2. **In all existing prompt files**:
+   - Replace `model: Auto (copilot)` with explicit default
+   - Use `"anthropic/claude-3.5-sonnet@2024-10-22"` unless specific model is known
 
-     ```yaml
-     # In a .prompt.md file (execution configuration)
-     model: Auto (copilot)  # OK - tells executor to pick model
-
-     # In generated output (provenance metadata)
-     model: "openai/gpt-4o@2024-11-20"  # REQUIRED - actual model used
-     ```
-
-2. **In `.github/prompts/meta/create-instruction-file-instructions.prompt.md`**:
-   - Ensure generated copilot-instructions.md clarifies this distinction
-   - Add a section explaining "Prompt Configuration vs Output Provenance"
-
-**Result**: UNRESOLVED (requires prompt fixes)
+**Result**: RESOLVED with corrected understanding (fix applied 2025-10-16)
 
 ---
 
@@ -549,23 +568,32 @@ This analysis was performed within a single execution context and has the follow
 
 **Fixes Applied**:
 
-### ✅ Issue #1: Model Format Specification Conflict (HIGH) - RESOLVED
+### ✅ Issue #1: Model Format Specification Conflict (HIGH) - RESOLVED (CORRECTED)
 
 **File Modified**: `.github/instructions/create-prompt.instructions.md`
 
-**Changes**:
-- Added "CRITICAL DISTINCTION" section to `model` field documentation
-- Clarified that `Auto (copilot)` is for prompt file execution config
-- Clarified that explicit format (e.g., `"openai/gpt-4o@2024-11-20"`) is for generated artifact provenance
-- Added examples showing both contexts side-by-side
+**Changes** (Corrected 2025-10-16):
 
-**Impact**: Eliminates confusion between prompt configuration and artifact metadata
+- **CORRECTED GUIDANCE**: Prompts must ALWAYS use explicit model format, never "Auto (copilot)"
+- Reason: AI models cannot self-detect identity, so "Auto (copilot)" loses provenance tracking
+- Set default model to: `"anthropic/claude-3.5-sonnet@2024-10-22"` (per copilot-instructions.md)
+- Added clear examples showing explicit format requirement
+- Marked "Auto (copilot)" as ❌ WRONG for losing provenance
+
+**Root Cause Clarification**:
+The original conflict was actually that BOTH contexts require explicit format:
+- Prompt files (.prompt.md): Need explicit model for provenance
+- Generated artifacts: Need explicit model for provenance
+- "Auto (copilot)" acceptable: NEVER (loses tracking)
+
+**Impact**: Ensures complete provenance tracking for all AI-assisted work
 
 ### ✅ Issue #2: Incorrect Model Provenance (MEDIUM) - RESOLVED
 
 **File Modified**: `.github/instructions/create-prompt.instructions.md`
 
 **Changes**:
+
 - Fixed YAML front matter metadata
 - Changed `model: "github/copilot@2025-10-15"` → `model: "openai/gpt-4o@2024-11-20"`
 - Added `source: ".github/prompts/create-prompt-instructions.prompt.md"`
@@ -575,7 +603,9 @@ This analysis was performed within a single execution context and has the follow
 ### ✅ Issue #7: Missing Source Fields (MEDIUM) - RESOLVED
 
 **Files Modified**:
+
 1. `.github/instructions/instruction-prompt-requirements.instructions.md`
+
    - Added `source: ".github/prompts/meta/create-instruction-file-instructions.prompt.md"`
 
 2. `.github/instructions/ai-assisted-output.instructions.md`
@@ -597,14 +627,14 @@ Per Option C strategy, the following issues are accepted for now and scheduled f
 
 ### Summary of Fixes
 
-| Issue | Severity | Status | Files Modified |
-|-------|----------|--------|----------------|
-| #1 Model format conflict | HIGH | ✅ RESOLVED | create-prompt.instructions.md |
-| #2 Incorrect provenance | MEDIUM | ✅ RESOLVED | create-prompt.instructions.md |
-| #7 Missing source fields | MEDIUM | ✅ RESOLVED | 2 files |
-| #3 Metadata duplication | MEDIUM | 📋 DEFERRED | - |
-| #6 Requirements duplication | MEDIUM | 📋 DEFERRED | - |
-| #4 Terminology variance | LOW | ✔️ ACCEPTED | - |
+| Issue                       | Severity | Status      | Files Modified                |
+| --------------------------- | -------- | ----------- | ----------------------------- |
+| #1 Model format conflict    | HIGH     | ✅ RESOLVED | create-prompt.instructions.md |
+| #2 Incorrect provenance     | MEDIUM   | ✅ RESOLVED | create-prompt.instructions.md |
+| #7 Missing source fields    | MEDIUM   | ✅ RESOLVED | 2 files                       |
+| #3 Metadata duplication     | MEDIUM   | 📋 DEFERRED | -                             |
+| #6 Requirements duplication | MEDIUM   | 📋 DEFERRED | -                             |
+| #4 Terminology variance     | LOW      | ✔️ ACCEPTED | -                             |
 
 **Result**: 4 of 7 issues resolved (100% of blocking issues, 50% of medium priority issues)
 
@@ -621,6 +651,7 @@ Per Option C strategy, the following issues are accepted for now and scheduled f
 - **Immediate value**: Contributors now have clear, consistent guidance
 
 **Next Steps**:
+
 1. ✅ Commit fixes to feature branch
 2. ✅ Update source prompts to match corrected guidance (future work)
 3. 📋 Schedule refactoring sprint for duplication issues

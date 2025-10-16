@@ -1,6 +1,6 @@
 ---
 ai_generated: true
-model: "openai/gpt-4o@2024-11-20"  # Corrected from "github/copilot@2025-10-15"
+model: "openai/gpt-4o@2024-11-20" # Corrected from "github/copilot@2025-10-15"
 operator: "johnmillerATcodemag-com"
 chat_id: "create-prompt-instructions-2025-10-15"
 prompt: |
@@ -119,30 +119,40 @@ mode: chat   # Interactive Q&A session
 
 **Purpose**: Specifies the AI model to use for prompt execution
 
-**Default Value**: `Auto (copilot)`
+**Default Value**: `"anthropic/claude-3.5-sonnet@2024-10-22"`
 
-**CRITICAL DISTINCTION**: 
-- **In prompt files (.prompt.md)**: Use `Auto (copilot)` for execution configuration
-- **In generated artifacts**: Must use explicit format per `.github/instructions/copilot-instructions.md`
-  - Format: `"<provider>/<model-name>@<version>"`
-  - Example: `"openai/gpt-4o@2024-11-20"` or `"anthropic/claude-3.5-sonnet@2024-10-22"`
+**CRITICAL**: Always use explicit model specification for proper provenance tracking.
 
 **Guidelines**:
 
-- Use `Auto (copilot)` in prompt files unless you have specific model requirements
-- This allows the execution system to select the most appropriate model
-- The actual model used will be recorded in generated artifact metadata using explicit format
-- Can specify alternative models if needed for specific capabilities
+- **REQUIRED**: Use explicit model format `"<provider>/<model-name>@<version>"`
+- **Default for new prompts**: `"anthropic/claude-3.5-sonnet@2024-10-22"` (per `copilot-instructions.md`)
+- **Why explicit format is required**: AI models cannot self-detect their identity, so "Auto (copilot)" loses provenance
+- **Operators should update**: If you know the actual model being used differs from the default, update accordingly
+- Can specify alternative models for specific requirements (e.g., reasoning tasks, longer context)
+
+**Model Format Requirements**:
+
+- Format: `"<provider>/<model-name>@<version>"`
+- Examples:
+  - `"openai/gpt-4o@2024-11-20"` - GPT-4o
+  - `"anthropic/claude-3.5-sonnet@2024-10-22"` - Claude 3.5 Sonnet (RECOMMENDED DEFAULT)
+  - `"openai/o1-preview@2024-09-12"` - o1-preview (for reasoning tasks)
 
 **Examples**:
 
 ```yaml
-# In a .prompt.md file (execution configuration)
-model: Auto (copilot) # Recommended default - tells executor to pick model
+# In a .prompt.md file - use explicit default
+model: "anthropic/claude-3.5-sonnet@2024-10-22"  # Recommended default
 
-# In generated output metadata (provenance - see copilot-instructions.md)
-# model: "openai/gpt-4o@2024-11-20" # Actual model used for generation
+# Alternative if you know you're using GPT-4o
+model: "openai/gpt-4o@2024-11-20"
+
+# ❌ WRONG - loses provenance tracking
+# model: Auto (copilot)
 ```
+
+**See Also**: `.github/instructions/copilot-instructions.md` § "Model Format Requirements" for complete guidance
 
 #### `tools`
 
