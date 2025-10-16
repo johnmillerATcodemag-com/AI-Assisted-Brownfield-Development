@@ -207,7 +207,6 @@ artifact_protection: true # Prevent creation without chat context
 
 - <task>: <hh:mm:ss>
 - Total: <hh:mm:ss>
-
 ````
 
 ## Provenance template for non-Markdown artifacts
@@ -231,7 +230,8 @@ When front matter isn’t applicable (e.g., images, binaries), create a sidecar:
 - Source Conversation Log: <relative path>
 
 Note: Do not create sidecars for Markdown (or other formats that support embedded front matter); embed YAML front matter instead.
-````
+```
+
 ````
 
 ## Capturing task durations
@@ -346,7 +346,7 @@ interface CopilotChat {
   chatId: string; // Copilot's native chat identifier (serves as chat ID)
   startTimestamp: string; // ISO8601 format
   userId: string; // GitHub username or configured operator
-  model: string; // Auto-detected model (e.g., "github/copilot@2024-10-15")
+  model: string; // Underlying AI model (e.g., "openai/gpt-4o@2024-11-20" or "anthropic/claude-3.5-sonnet@2024-10-22")
   conversationHistory: ChatMessage[];
   artifactsCreated: string[]; // Paths to generated files
 }
@@ -485,7 +485,7 @@ The file MUST begin with the following YAML front matter fields per `.github/ins
 ```yaml
 ---
 ai_generated: true
-model: "<model-name-and-version>"
+model: "<provider>/<model-name>@<version>"  # e.g., "openai/gpt-4o@2024-11-20" or "anthropic/claude-3.5-sonnet@2024-10-22"
 operator: "<operator-username>"
 chat_id: "<chat-identifier>"
 prompt: |
@@ -500,6 +500,9 @@ ai_log: "ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md"
 ---
 ```
 
+**Important**: Use the underlying AI model (e.g., `"openai/gpt-4o@2024-11-20"`), not the interface (e.g., "github/copilot").
+
 ### Content Requirements
 
 Following the metadata, include the final Markdown content for `.github/instructions/ai-assisted-output.instructions.md` with all sections and requirements specified above. Do not include commentary outside the document.
+````

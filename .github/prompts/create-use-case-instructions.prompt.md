@@ -230,7 +230,7 @@ The file MUST begin with the following YAML front matter fields per `.github/ins
 ```yaml
 ---
 ai_generated: true
-model: "<model-name-and-version>"
+model: "<provider>/<model-name>@<version>" # e.g., "openai/gpt-4o@2024-11-20" or "anthropic/claude-3.5-sonnet@2024-10-22"
 operator: "<operator-username>"
 chat_id: "<chat-identifier>"
 prompt: |
@@ -245,6 +245,8 @@ ai_log: "ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md"
 applyTo: "Model/use-cases/*.md"
 ---
 ```
+
+**Important**: Use the underlying AI model (e.g., `"openai/gpt-4o@2024-11-20"`), not the interface (e.g., "github/copilot").
 
 ### Content Requirements
 
