@@ -36,11 +36,15 @@ This document provides comprehensive instructions for GitHub Copilot when workin
 #### Model Format Requirements
 
 - **Format**: `"<provider>/<model-name>@<version>"`
+- **Default Model for Prompts**: `"anthropic/claude-3.5-sonnet@2024-10-22"`
+  - Use this as the default in prompt files that generate other prompts
+  - AI models CANNOT self-detect their identity reliably
+  - Operators should update to actual model if known to be different
 - **Examples**:
   - `"openai/gpt-4o@2024-11-20"` - GPT-4o (latest)
   - `"openai/gpt-4-turbo@2024-04-09"` - GPT-4 Turbo
   - `"openai/o1-preview@2024-09-12"` - o1-preview reasoning model
-  - `"anthropic/claude-3.5-sonnet@2024-10-22"` - Claude 3.5 Sonnet
+  - `"anthropic/claude-3.5-sonnet@2024-10-22"` - Claude 3.5 Sonnet (RECOMMENDED DEFAULT)
   - `"anthropic/claude-3-opus@2024-02-29"` - Claude 3 Opus
   - `"google/gemini-1.5-pro@2024-02"` - Gemini 1.5 Pro
 
@@ -49,8 +53,19 @@ This document provides comprehensive instructions for GitHub Copilot when workin
 ❌ **WRONG**: `"github/copilot@2025-10-15"` (interface, not model)
 ❌ **WRONG**: `"copilot"` (too vague)
 ❌ **WRONG**: `"gpt-4"` (missing provider and version)
+❌ **WRONG**: `"Auto (copilot)"` (models cannot self-detect)
 
 ✅ **CORRECT**: `"openai/gpt-4o@2024-11-20"` (provider/model@version)
+
+#### Why Models Cannot Self-Detect
+
+**Critical Limitation**: AI models have NO ability to reliably detect their own identity because:
+- No introspection API exists
+- Interfaces (GitHub Copilot, etc.) don't pass model identity to the model
+- Any attempt to "guess" results in hallucination
+- Version/date information is never available to the model
+
+**Therefore**: Always use explicit model specification, never rely on auto-detection.
 
 #### Interface vs Model
 
@@ -261,7 +276,7 @@ Add appropriate entry to `README.md`:
 ```yaml
 ---
 mode: agent | chat # Execution mode
-model: Auto (copilot) # Let Copilot choose
+model: "anthropic/claude-3.5-sonnet@2024-10-22" # Default model (update if different)
 tools: ["create", "edit", "read"] # Available tools
 description: <clear-description> # What the prompt does
 prompt_metadata:

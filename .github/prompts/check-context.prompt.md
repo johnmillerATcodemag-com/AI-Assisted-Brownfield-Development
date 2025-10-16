@@ -1,6 +1,6 @@
 ---
 description: "Analyzes instruction files in the .github/instrustion folder and report any conflicts or inconsistencies"
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ['search', 'edit', 'fetch']
 mode: agent
 ---

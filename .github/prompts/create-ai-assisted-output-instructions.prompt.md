@@ -1,6 +1,6 @@
 ---
 mode: agent
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["edit", "create"]
 description: Generates repository guidelines for AI-assisted outputs, including provenance metadata requirements and an AI chat logging workflow
 prompt_metadata:

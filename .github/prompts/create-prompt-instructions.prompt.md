@@ -17,7 +17,7 @@ total_duration: "00:15:00"
 ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
 source: "johnmillerATcodemag-com"
 mode: agent
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["create"]
 description: Generates comprehensive Markdown authoring guidelines for creating effective repository prompts
 prompt_metadata:

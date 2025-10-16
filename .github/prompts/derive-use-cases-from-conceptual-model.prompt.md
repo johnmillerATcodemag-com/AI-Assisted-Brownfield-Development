@@ -1,6 +1,6 @@
 ---
 mode: agent
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["search", "read", "create"]
 description: Derive use cases from conceptual model by automatically locating and reading the ORM model file from Model/orm/, then generating one Markdown file per use case under Model/use-cases, plus an index file
 prompt_metadata:

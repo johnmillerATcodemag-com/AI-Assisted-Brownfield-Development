@@ -17,7 +17,7 @@ total_duration: "00:20:00"
 ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
 source: "johnmillerATcodemag-com"
 mode: chat
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["create"]
 description: Interactive guide for creating instruction-prompt files with AI provenance requirements built-in
 prompt_metadata:
@@ -151,7 +151,7 @@ The prompt file will have this structure:
 
 ```yaml
 mode: agent
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["create"]
 description: <Description based on your domain>
 prompt_metadata:

@@ -1,6 +1,6 @@
 ---
 mode: agent
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["create", "edit"]
 description: Creates a comprehensive prompt that generates Markdown authoring guidelines for creating effective repository prompts
 prompt_metadata:

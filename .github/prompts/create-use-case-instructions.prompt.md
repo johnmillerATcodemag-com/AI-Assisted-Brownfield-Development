@@ -1,6 +1,6 @@
 ---
 mode: agent
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["edit", "create"]
 description: Generates a Markdown authoring guide for creating use cases with a standard structure and Mermaid diagram guidance
 prompt_metadata:

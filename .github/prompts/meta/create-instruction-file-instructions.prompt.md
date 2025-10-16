@@ -1,6 +1,6 @@
 ---
 mode: agent
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["edit", "create"]
 description: Generates a Markdown authoring guide for creating instruction files with recommended sections, placement, naming, and a validation checklist
 prompt_metadata:
