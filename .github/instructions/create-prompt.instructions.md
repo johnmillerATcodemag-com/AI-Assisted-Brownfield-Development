@@ -1,6 +1,6 @@
 ---
 ai_generated: true
-model: "github/copilot@2025-10-15"
+model: "openai/gpt-4o@2024-11-20" # Corrected from "github/copilot@2025-10-15"
 operator: "johnmillerATcodemag-com"
 chat_id: "create-prompt-instructions-2025-10-15"
 prompt: |
@@ -18,6 +18,7 @@ task_durations:
     duration: "00:05:00"
 total_duration: "00:45:00"
 ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
+source: ".github/prompts/create-prompt-instructions.prompt.md"
 applyTo: "**/*.prompt.md"
 ---
 
@@ -118,19 +119,40 @@ mode: chat   # Interactive Q&A session
 
 **Purpose**: Specifies the AI model to use for prompt execution
 
-**Default Value**: `Auto (copilot)`
+**Default Value**: `"anthropic/claude-3.5-sonnet@2024-10-22"`
+
+**CRITICAL**: Always use explicit model specification for proper provenance tracking.
 
 **Guidelines**:
 
-- Use `Auto (copilot)` unless you have specific model requirements
-- Allows the system to select the most appropriate model
-- Can specify alternative models if needed for specific capabilities
+- **REQUIRED**: Use explicit model format `"<provider>/<model-name>@<version>"`
+- **Default for new prompts**: `"anthropic/claude-3.5-sonnet@2024-10-22"` (per `copilot-instructions.md`)
+- **Why explicit format is required**: AI models cannot self-detect their identity, so "Auto (copilot)" loses provenance
+- **Operators should update**: If you know the actual model being used differs from the default, update accordingly
+- Can specify alternative models for specific requirements (e.g., reasoning tasks, longer context)
+
+**Model Format Requirements**:
+
+- Format: `"<provider>/<model-name>@<version>"`
+- Examples:
+  - `"openai/gpt-4o@2024-11-20"` - GPT-4o
+  - `"anthropic/claude-3.5-sonnet@2024-10-22"` - Claude 3.5 Sonnet (RECOMMENDED DEFAULT)
+  - `"openai/o1-preview@2024-09-12"` - o1-preview (for reasoning tasks)
 
 **Examples**:
 
 ```yaml
-model: Auto (copilot) # Recommended default
+# In a .prompt.md file - use explicit default
+model: "anthropic/claude-3.5-sonnet@2024-10-22"  # Recommended default
+
+# Alternative if you know you're using GPT-4o
+model: "openai/gpt-4o@2024-11-20"
+
+# ❌ WRONG - loses provenance tracking
+# model: Auto (copilot)
 ```
+
+**See Also**: `.github/instructions/copilot-instructions.md` § "Model Format Requirements" for complete guidance
 
 #### `tools`
 

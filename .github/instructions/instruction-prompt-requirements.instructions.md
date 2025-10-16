@@ -15,6 +15,7 @@ task_durations:
     duration: "00:02:00"
 total_duration: "00:10:00"
 ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
+source: ".github/prompts/meta/create-instruction-file-instructions.prompt.md"
 applyTo: "**/*.instructions.prompt.md"
 ---
 
