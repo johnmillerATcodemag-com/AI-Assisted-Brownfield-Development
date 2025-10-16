@@ -39,6 +39,7 @@ This repository enforces provenance and logging for any AI-assisted outputs (cod
 ### Guidance & Instructions
 
 - [`.github/instructions/ai-assisted-output.instructions.md`](.github/instructions/ai-assisted-output.instructions.md) — How to generate AI-assisted outputs with required metadata, logging, and CI enforcement
+- [`.github/instructions/copilot-instructions.md`](.github/instructions/copilot-instructions.md) — **GitHub Copilot Users Start Here** - Comprehensive Copilot-specific guidance for model format, conversation logging, and quality standards ([chat log](ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md))
 - [`.github/instructions/create-prompt.instructions.md`](.github/instructions/create-prompt.instructions.md) — Comprehensive guidelines for authoring effective repository prompts ([chat log](ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md))
 - [`.github/instructions/instruction-prompt-requirements.instructions.md`](.github/instructions/instruction-prompt-requirements.instructions.md) — Requirements for prompts that generate instruction files ([chat log](ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md))
 
