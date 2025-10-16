@@ -60,3 +60,4 @@ This repository enforces provenance and logging for any AI-assisted outputs (cod
   - Generated from: [`.github/prompts/meta/validate-and-improve-instructions.prompt.md`](.github/prompts/meta/validate-and-improve-instructions.prompt.md)
   - Status: Critical fixes applied (Option C executed - 4 issues resolved, 3 deferred for refactoring)
   - Provenance: [Chat log](ai-logs/2025/10/15/validate-improve-instructions-20251015-212137/conversation.md) | [Summary](ai-logs/2025/10/15/validate-improve-instructions-20251015-212137/summary.md)
+  - Verification: [Fixes verified 2025-10-16](validation-fixes-verified-20251016.md) ([chat log](ai-logs/2025/10/16/resume-validation-fixes-20251016/conversation.md))
