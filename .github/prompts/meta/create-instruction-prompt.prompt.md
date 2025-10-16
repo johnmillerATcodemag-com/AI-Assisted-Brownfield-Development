@@ -1,6 +1,6 @@
 ---
 ai_generated: true
-model: "github/copilot@2025-10-15"
+model: "openai/gpt-4o@2024-11-20"
 operator: "johnmillerATcodemag-com"
 chat_id: "create-prompt-instructions-2025-10-15"
 prompt: |
@@ -15,6 +15,7 @@ task_durations:
     duration: "00:05:00"
 total_duration: "00:20:00"
 ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
+source: "johnmillerATcodemag-com"
 mode: chat
 model: Auto (copilot)
 tools: ["create"]
@@ -40,6 +41,8 @@ prompt_metadata:
 I'll guide you through creating a new instruction-prompt file that automatically includes AI provenance requirements.
 
 This ensures any instruction file generated will comply with our AI-assisted output standards.
+
+**Important**: Follow [`.github/instructions/copilot-instructions.md`](.github/instructions/copilot-instructions.md) for model format, conversation logging, and post-creation requirements.
 
 ## Let's Get Started
 
@@ -196,7 +199,7 @@ Generate `<output-path>` with the following YAML front matter:
 ## \`\`\`yaml
 
 ai_generated: true
-model: "<model-name-and-version>"
+model: "<provider>/<model-name>@<version>" # e.g., "openai/gpt-4o@2024-11-20" or "anthropic/claude-3.5-sonnet@2024-10-22"
 operator: "<username>"
 chat_id: "<chat-id>"
 prompt: |
@@ -209,11 +212,14 @@ task_durations:
   duration: "<hh:mm:ss>"
   total_duration: "<hh:mm:ss>"
   ai_log: "ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md"
+  source: ".github/prompts/meta/create-instruction-prompt.prompt.md"
   applyTo: "<pattern>" # If specified
 
 ---
 
 \`\`\`
+
+**Important**: Use the underlying AI model (e.g., `"openai/gpt-4o@2024-11-20"`), not the interface (e.g., "github/copilot").
 
 ### Content
 
@@ -230,7 +236,7 @@ Before creating the file, I'll verify:
 ✅ File paths follow repository conventions
 ✅ Prompt ID uses kebab-case format
 ✅ ApplyTo pattern (if provided) is a valid glob
-✅ YAML front matter template includes all 10 required fields
+✅ YAML front matter template includes all 11 required fields
 ✅ Deliverable section explicitly requires AI provenance metadata
 ✅ Context section includes CRITICAL compliance statement
 
