@@ -1,4 +1,4 @@
-# AI-Assisted Brownfield Development
+# AI-Assisted Software Development
 
 This repo was created for the 2025 Next Gen AI Conference Leveraging AI for Legacy Code Refactoring session
 
