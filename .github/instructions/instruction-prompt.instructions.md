@@ -2,7 +2,7 @@
 ai_generated: true
 model: "openai/gpt-4o@2024-11-20"
 operator: "johnmillerATcodemag-com"
-chat_id: "create-prompt-instructions-2025-10-15"
+chat_id: "prompt-file.instructions-2025-10-15"
 prompt: |
   Create an instruction file that ensures all instruction-generating prompts
   include AI provenance requirements in their deliverable sections.
@@ -14,7 +14,7 @@ task_durations:
   - task: "template creation"
     duration: "00:02:00"
 total_duration: "00:10:00"
-ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
+ai_log: "ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md"
 source: ".github/prompts/meta/create-instruction-file-instructions.prompt.md"
 applyTo: "**/*.instructions.prompt.md"
 ---
@@ -248,7 +248,7 @@ This requirement is enforced through:
 
 Compliant instruction-generating prompts in this repository:
 
-- `.github/prompts/create-prompt-instructions.prompt.md`
+- `.github/prompts/prompt-file.instructions.prompt.md`
 - `.github/prompts/create-ai-assisted-output-instructions.prompt.md`
 - `.github/prompts/create-use-case-instructions.prompt.md`
 

@@ -1,6 +1,6 @@
 # Session Summary: Create Prompt Instructions
 
-**Session ID**: create-prompt-instructions-2025-10-15
+**Session ID**: prompt-file.instructions-2025-10-15
 **Date**: October 15, 2025
 **Operator**: johnmillerATcodemag-com
 **Model**: anthropic/claude-3.5-sonnet@2024-10-22
@@ -23,7 +23,7 @@ Create comprehensive prompt authoring instructions and establish a governance sy
    - Complete examples and templates
    - Post-creation requirements for AI logs and README updates
 
-2. **Instruction Prompt Requirements** (`.github/instructions/instruction-prompt-requirements.instructions.md`)
+2. **Instruction Prompt Requirements** (`.github/instructions/instruction-prompt.instructions.md`)
 
    - Governance layer ensuring instruction-generating prompts include AI provenance
    - Automatic application via `applyTo: "**/*.instructions.prompt.md"`
@@ -48,12 +48,12 @@ Create comprehensive prompt authoring instructions and establish a governance sy
 
 - Fixed non-compliant instruction file by regenerating with AI provenance metadata
 - Extended AI provenance requirements to all instruction-generating prompts:
-  - `create-prompt-instructions.prompt.md`
+  - `prompt-file.instructions.prompt.md`
   - `create-ai-assisted-output-instructions.prompt.md`
   - `create-use-case-instructions.prompt.md`
 - Created multi-layer governance system:
   - Layer 0: Individual files with embedded metadata
-  - Layer 1: `instruction-prompt-requirements.instructions.md` (applyTo pattern)
+  - Layer 1: `instruction-prompt.instructions.md` (applyTo pattern)
   - Layer 2: `create-instruction-prompt.prompt.md` (meta-prompt generator)
   - Layer 3: `create-prompt.instructions.md` (post-creation requirements)
 
@@ -98,16 +98,16 @@ Create comprehensive prompt authoring instructions and establish a governance sy
 
 ## Artifacts Produced
 
-| Artifact                                                                   | Type                  | Purpose                                                    |
-| -------------------------------------------------------------------------- | --------------------- | ---------------------------------------------------------- |
-| `.github/instructions/create-prompt.instructions.md`                       | Instruction File      | Prompt authoring guidelines with provenance                |
-| `.github/instructions/instruction-prompt-requirements.instructions.md`     | Governance File       | Ensures instruction-prompts include AI provenance          |
-| `.github/prompts/meta/create-instruction-prompt.prompt.md`                 | Meta-Prompt           | Generates compliant instruction-generating prompts         |
-| `.github/instructions/copilot-instructions.md`                             | Reference Guide       | Consolidated Copilot-specific requirements (11 req fields) |
-| `.github/prompts/meta/validate-and-improve-instructions.prompt.md`         | Meta-Prompt (QA)      | Iterative validation and improvement orchestrator          |
-| `ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md` | Documentation         | Complete session transcript with model format fixes        |
-| `ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/summary.md`      | Documentation         | This summary                                               |
-| Updated `README.md`                                                        | Documentation         | Links to artifacts with provenance trails                  |
+| Artifact                                                                 | Type             | Purpose                                                    |
+| ------------------------------------------------------------------------ | ---------------- | ---------------------------------------------------------- |
+| `.github/instructions/create-prompt.instructions.md`                     | Instruction File | Prompt authoring guidelines with provenance                |
+| `.github/instructions/instruction-prompt.instructions.md`                | Governance File  | Ensures instruction-prompts include AI provenance          |
+| `.github/prompts/meta/create-instruction-prompt.prompt.md`               | Meta-Prompt      | Generates compliant instruction-generating prompts         |
+| `.github/instructions/copilot-instructions.md`                           | Reference Guide  | Consolidated Copilot-specific requirements (11 req fields) |
+| `.github/prompts/meta/validate-and-improve-instructions.prompt.md`       | Meta-Prompt (QA) | Iterative validation and improvement orchestrator          |
+| `ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md` | Documentation    | Complete session transcript with model format fixes        |
+| `ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/summary.md`      | Documentation    | This summary                                               |
+| Updated `README.md`                                                      | Documentation    | Links to artifacts with provenance trails                  |
 
 ## Lessons Learned
 
@@ -151,7 +151,7 @@ Create comprehensive prompt authoring instructions and establish a governance sy
 ## Session Metadata
 
 ```yaml
-session_id: create-prompt-instructions-2025-10-15
+session_id: prompt-file.instructions-2025-10-15
 started: 2025-10-15T14:00:00Z
 ended: 2025-10-15T14:45:00Z
 total_duration: 00:45:00

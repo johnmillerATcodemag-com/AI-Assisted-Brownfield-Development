@@ -20,7 +20,7 @@ This report analyzes the instruction files in `.github/instructions/` for confli
 - `.github/instructions/ai-assisted-output.instructions.md`
 - `.github/instructions/copilot-instructions.md`
 - `.github/instructions/create-prompt.instructions.md`
-- `.github/instructions/instruction-prompt-requirements.instructions.md`
+- `.github/instructions/instruction-prompt.instructions.md`
 
 **Analysis Categories**:
 
@@ -73,6 +73,7 @@ The actual issue is that the instructions were INCORRECT about "Auto (copilot)" 
 - **WRONG ASSUMPTION**: That "Auto (copilot)" could be acceptable in prompt files
 
 The real conflict was:
+
 - `copilot-instructions.md` correctly states: Use explicit format `"<provider>/<model>@<version>"`
 - `create-prompt.instructions.md` incorrectly recommended: "Auto (copilot)" as default
 
@@ -92,6 +93,7 @@ model: "openai/gpt-4o@2024-11-20"  # Actual model that generated the artifact
 ```
 
 **Why Explicit Model is Required Everywhere**:
+
 1. AI models have no introspection API to detect their identity
 2. Without explicit specification, provenance trail is broken
 3. Cannot audit or reproduce AI-assisted work without knowing the model
@@ -101,7 +103,8 @@ model: "openai/gpt-4o@2024-11-20"  # Actual model that generated the artifact
 
 **Fix in source prompts**:
 
-1. **In `.github/prompts/create-prompt-instructions.prompt.md`**:
+1. **In `.github/prompts/prompt-file.instructions.prompt.md`**:
+
    - Remove all "Auto (copilot)" recommendations
    - Specify default model: `"anthropic/claude-3.5-sonnet@2024-10-22"`
    - Explain why explicit format is required (model self-detection impossible)
@@ -145,7 +148,7 @@ The file was generated before `copilot-instructions.md` standardized the model f
 
 **Fix in source prompt**:
 
-- Update `.github/prompts/create-prompt-instructions.prompt.md` metadata to use correct model format
+- Update `.github/prompts/prompt-file.instructions.prompt.md` metadata to use correct model format
 - Regenerate `create-prompt.instructions.md` with corrected metadata
 
 **Suggested Change**:
@@ -185,7 +188,7 @@ The AI provenance metadata requirements are documented in multiple places with s
    - Lists exact same 11 fields with YAML template
    - Nearly identical content structure
 
-3. **Referenced in** `instruction-prompt-requirements.instructions.md`:
+3. **Referenced in** `instruction-prompt.instructions.md`:
    - Lines 48-76: Shows YAML template for instruction files
    - Subset of the same provenance fields
 
@@ -201,7 +204,7 @@ While some duplication serves pedagogical purposes (showing examples in context)
 
 - Primary: `ai-assisted-output.instructions.md` § "Required provenance metadata"
 - Duplicate: `copilot-instructions.md` § "AI Provenance Metadata Requirements"
-- Reference: `instruction-prompt-requirements.instructions.md` § "Deliverable Section"
+- Reference: `instruction-prompt.instructions.md` § "Deliverable Section"
 
 **Recommendation**:
 
@@ -237,7 +240,7 @@ While some duplication serves pedagogical purposes (showing examples in context)
      See [complete field definitions](ai-assisted-output.instructions.md#required-provenance-metadata).
      ```
 
-3. **In `instruction-prompt-requirements.instructions.md`**:
+3. **In `instruction-prompt.instructions.md`**:
    - Keep template but add reference to canonical source
    - Note that template must stay synchronized with policy
 
@@ -419,7 +422,7 @@ However, in the actual instruction files analyzed:
 
 - `copilot-instructions.md` has: `source: "johnmillerATcodemag-com"` ✅ Matches
 - `create-prompt.instructions.md` has: No source field ❌ Missing
-- `instruction-prompt-requirements.instructions.md` has: No source field ❌ Missing
+- `instruction-prompt.instructions.md` has: No source field ❌ Missing
 
 **Location**:
 
@@ -439,9 +442,9 @@ However, in the actual instruction files analyzed:
 
 ```yaml
 # In create-prompt.instructions.md
-source: ".github/prompts/create-prompt-instructions.prompt.md"
+source: ".github/prompts/prompt-file.instructions.prompt.md"
 
-# In instruction-prompt-requirements.instructions.md
+# In instruction-prompt.instructions.md
 source: ".github/prompts/meta/create-instruction-file-instructions.prompt.md"
 ```
 
@@ -474,12 +477,12 @@ Note: Issue #5 was determined to NOT be an issue (correct structure), so actual 
 
 ### By File
 
-| File                                              | Issues Found       |
-| ------------------------------------------------- | ------------------ |
-| `copilot-instructions.md`                         | #1, #3, #4, #6, #7 |
-| `create-prompt.instructions.md`                   | #1, #2, #3, #6, #7 |
-| `ai-assisted-output.instructions.md`              | #3, #6             |
-| `instruction-prompt-requirements.instructions.md` | #3, #7             |
+| File                                 | Issues Found       |
+| ------------------------------------ | ------------------ |
+| `copilot-instructions.md`            | #1, #3, #4, #6, #7 |
+| `create-prompt.instructions.md`      | #1, #2, #3, #6, #7 |
+| `ai-assisted-output.instructions.md` | #3, #6             |
+| `instruction-prompt.instructions.md` | #3, #7             |
 
 ## Source Prompt Mapping
 
@@ -487,8 +490,8 @@ Issues mapped to source prompts that need fixing:
 
 | Issue # | Source Prompt to Fix                                                                                                                                                                                             |
 | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| #1      | `.github/prompts/create-prompt-instructions.prompt.md`<br>`.github/prompts/meta/create-instruction-file-instructions.prompt.md`                                                                                  |
-| #2      | `.github/prompts/create-prompt-instructions.prompt.md` (metadata)                                                                                                                                                |
+| #1      | `.github/prompts/prompt-file.instructions.prompt.md`<br>`.github/prompts/meta/create-instruction-file-instructions.prompt.md`                                                                                    |
+| #2      | `.github/prompts/prompt-file.instructions.prompt.md` (metadata)                                                                                                                                                  |
 | #3      | `.github/prompts/create-ai-assisted-output-instructions.prompt.md`<br>`.github/prompts/meta/create-instruction-file-instructions.prompt.md`<br>Prompt that generates copilot-instructions (needs identification) |
 | #4      | Prompt that generates copilot-instructions (minor wording fix)                                                                                                                                                   |
 | #6      | All three instruction-generating prompts (refactor to reference canonical)                                                                                                                                       |
@@ -582,6 +585,7 @@ This analysis was performed within a single execution context and has the follow
 
 **Root Cause Clarification**:
 The original conflict was actually that BOTH contexts require explicit format:
+
 - Prompt files (.prompt.md): Need explicit model for provenance
 - Generated artifacts: Need explicit model for provenance
 - "Auto (copilot)" acceptable: NEVER (loses tracking)
@@ -596,7 +600,7 @@ The original conflict was actually that BOTH contexts require explicit format:
 
 - Fixed YAML front matter metadata
 - Changed `model: "github/copilot@2025-10-15"` → `model: "openai/gpt-4o@2024-11-20"`
-- Added `source: ".github/prompts/create-prompt-instructions.prompt.md"`
+- Added `source: ".github/prompts/prompt-file.instructions.prompt.md"`
 
 **Impact**: File now complies with its own standards
 
@@ -604,7 +608,7 @@ The original conflict was actually that BOTH contexts require explicit format:
 
 **Files Modified**:
 
-1. `.github/instructions/instruction-prompt-requirements.instructions.md`
+1. `.github/instructions/instruction-prompt.instructions.md`
 
    - Added `source: ".github/prompts/meta/create-instruction-file-instructions.prompt.md"`
 

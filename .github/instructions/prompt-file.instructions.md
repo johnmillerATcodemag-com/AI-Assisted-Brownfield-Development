@@ -2,7 +2,7 @@
 ai_generated: true
 model: "openai/gpt-4o@2024-11-20" # Corrected from "github/copilot@2025-10-15"
 operator: "johnmillerATcodemag-com"
-chat_id: "create-prompt-instructions-2025-10-15"
+chat_id: "prompt-file.instructions-2025-10-15"
 prompt: |
   Generate Prompt Authoring Instructions - Create comprehensive Markdown authoring
   guidelines that help developers and prompt authors create effective, well-structured
@@ -17,8 +17,8 @@ task_durations:
   - task: "validation and formatting"
     duration: "00:05:00"
 total_duration: "00:45:00"
-ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
-source: ".github/prompts/create-prompt-instructions.prompt.md"
+ai_log: "ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md"
+source: ".github/prompts/prompt-file.instructions.prompt.md"
 applyTo: "**/*.prompt.md"
 ---
 
@@ -244,7 +244,7 @@ description: Use this when you need tests  # Describes usage, not function
 id: api-documentation-generator
 id: python-unit-test-creator
 id: security-vulnerability-analyzer
-id: create-prompt-instructions-prompt
+id: prompt-file.instructions-prompt
 ```
 
 **Anti-patterns**:
@@ -742,7 +742,7 @@ Use this checklist before submitting a prompt:
 api-documentation-generator.prompt.md
 python-unit-test-creator.prompt.md
 security-vulnerability-analyzer.prompt.md
-create-prompt-instructions.prompt.md
+prompt-file.instructions.prompt.md
 ```
 
 **Anti-patterns**:

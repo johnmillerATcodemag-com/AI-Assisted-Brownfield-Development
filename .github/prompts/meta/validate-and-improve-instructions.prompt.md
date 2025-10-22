@@ -14,7 +14,7 @@ task_durations:
   - task: "workflow orchestration logic"
     duration: "00:05:00"
 total_duration: "00:15:00"
-ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
+ai_log: "ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md"
 source: "johnmillerATcodemag-com"
 mode: agent
 model: "anthropic/claude-3.5-sonnet@2024-10-22"
@@ -85,7 +85,7 @@ Execute the following prompts in sequence:
    - Wait for completion
    - Verify file created successfully
 
-3. **Submit**: `.github/prompts/create-prompt-instructions.prompt.md`
+3. **Submit**: `.github/prompts/prompt-file.instructions.prompt.md`
 
    - Generates: `.github/instructions/create-prompt.instructions.md`
    - Wait for completion
@@ -137,7 +137,7 @@ Execute the following prompts in sequence:
 
    - `ai-assisted-output.instructions.md` ← `create-ai-assisted-output-instructions.prompt.md`
    - `instruction-standards.instruction.md` ← `meta/create-instruction-file-instructions.prompt.md`
-   - `create-prompt.instructions.md` ← `create-prompt-instructions.prompt.md`
+   - `create-prompt.instructions.md` ← `prompt-file.instructions.prompt.md`
    - `create-use-case.instructions.md` ← `create-use-case-instructions.prompt.md`
 
 ### Phase 5: Validation Cycle

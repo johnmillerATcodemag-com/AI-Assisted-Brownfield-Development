@@ -2,7 +2,7 @@
 ai_generated: true
 model: "openai/gpt-4o@2024-11-20"
 operator: "johnmillerATcodemag-com"
-chat_id: "create-prompt-instructions-2025-10-15"
+chat_id: "prompt-file.instructions-2025-10-15"
 prompt: |
   Create a meta-prompt generator that produces instruction-generating prompts with
   AI provenance requirements built in.
@@ -14,7 +14,7 @@ task_durations:
   - task: "template creation"
     duration: "00:05:00"
 total_duration: "00:20:00"
-ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
+ai_log: "ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md"
 source: "johnmillerATcodemag-com"
 mode: chat
 model: "anthropic/claude-3.5-sonnet@2024-10-22"

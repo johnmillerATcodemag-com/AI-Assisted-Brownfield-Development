@@ -1,6 +1,6 @@
 # AI Conversation Log
 
-- Chat ID: create-prompt-instructions-2025-10-15
+- Chat ID: prompt-file.instructions-2025-10-15
 - Operator: johnmillerATcodemag-com
 - Model: openai/gpt-4o@2024-11-20
 - Started: 2025-10-15T00:00:00Z
@@ -27,7 +27,7 @@ for creating effective repository prompts following established standards.
 [2025-10-15T00:05:00Z] openai/gpt-4o@2024-11-20
 
 ```text
-Created prompt file: .github/prompts/create-prompt-instructions.prompt.md
+Created prompt file: .github/prompts/prompt-file.instructions.prompt.md
 
 The prompt file includes:
 - Mode: agent (for file creation)
@@ -42,7 +42,7 @@ The prompt file includes:
 [2025-10-15T00:10:00Z] johnmillerATcodemag-com
 
 ```text
-Submit #file:create-prompt-instructions.prompt.md
+Submit #file:prompt-file.instructions.prompt.md
 ```
 
 [2025-10-15T00:15:00Z] openai/gpt-4o@2024-11-20
@@ -88,17 +88,17 @@ Fixed conversation log format and added source field tracking:
 
 **Artifacts Produced**:
 
-- `.github/prompts/create-prompt-instructions.prompt.md` - Prompt file for generating authoring instructions
+- `.github/prompts/prompt-file.instructions.prompt.md` - Prompt file for generating authoring instructions
 - `.github/instructions/create-prompt.instructions.md` - Comprehensive prompt authoring guidelines
-- `.github/instructions/instruction-prompt-requirements.instructions.md` - Governance for instruction-generating prompts
+- `.github/instructions/instruction-prompt.instructions.md` - Governance for instruction-generating prompts
 - `.github/prompts/meta/create-instruction-prompt.prompt.md` - Meta-prompt generator for creating new instruction prompts
 - `.github/instructions/copilot-instructions.md` - Comprehensive Copilot-specific guidance (model format, conversation logging, quality standards)
 
 **Files Modified (Exchange 3)**:
 
 - `.github/instructions/copilot-instructions.md` - Fixed conversation example, added source field (11th field), updated checklist
-- `ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md` - Fixed model format in exchanges
-- `.github/prompts/create-prompt-instructions.prompt.md` - Added source field to metadata and template
+- `ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md` - Fixed model format in exchanges
+- `.github/prompts/prompt-file.instructions.prompt.md` - Added source field to metadata and template
 - `.github/prompts/meta/create-instruction-prompt.prompt.md` - Added source field to metadata and template
 - `.github/instructions/ai-assisted-output.instructions.md` - Added source field to templates and conversation log template
 
@@ -108,7 +108,7 @@ Fixed conversation log format and added source field tracking:
 
 ```text
 create a prompt file that create a new branch then submits the #file:create-ai-assisted-output-instructions.prompt.md,
-the #file:create-instruction-file-instructions.prompt.md, the #file:create-prompt-instructions.prompt.md, and
+the #file:create-instruction-file-instructions.prompt.md, the #file:prompt-file.instructions.prompt.md, and
 the #file:create-use-case-instructions.prompt.md. when these prompts have finished submit the #file:check-context.prompt.md.
 when the #file:check-context.prompt.md has finished, address the issues found in the instruction files in the prompt
 file that generated the instruction file. Then test the changes by deleting the generated instruction files and then
@@ -159,9 +159,9 @@ Outputs: validation-report.md, updated prompts, fresh instructions, AI logs, sum
 ```text
 I see the model recorded in the metadata is "openai/gpt-4o@2024-11-20" when I used Claude Sonnet 3.5. Find the root cause.
 
-Then: yes and lets add default model to the copilot instructions that should be used to set the model value in prompts 
-that generate prompt files. If there actually is no way to determine the model currently running the prompt (research this 
-deeply), then the default should not be 'Auto', it should be the latest release of Claude Sonnet. Update the existing 
+Then: yes and lets add default model to the copilot instructions that should be used to set the model value in prompts
+that generate prompt files. If there actually is no way to determine the model currently running the prompt (research this
+deeply), then the default should not be 'Auto', it should be the latest release of Claude Sonnet. Update the existing
 prompt files that use the Auto model to use the latest release of Claude Sonnet.
 ```
 
@@ -223,9 +223,9 @@ Files Updated:
 
 **Artifacts Produced**:
 
-- `.github/prompts/create-prompt-instructions.prompt.md` - Prompt file for generating authoring instructions
+- `.github/prompts/prompt-file.instructions.prompt.md` - Prompt file for generating authoring instructions
 - `.github/instructions/create-prompt.instructions.md` - Comprehensive prompt authoring guidelines
-- `.github/instructions/instruction-prompt-requirements.instructions.md` - Governance for instruction-generating prompts
+- `.github/instructions/instruction-prompt.instructions.md` - Governance for instruction-generating prompts
 - `.github/prompts/meta/create-instruction-prompt.prompt.md` - Meta-prompt generator for creating new instruction prompts
 - `.github/instructions/copilot-instructions.md` - Comprehensive Copilot-specific guidance (model format, conversation logging, quality standards)
 

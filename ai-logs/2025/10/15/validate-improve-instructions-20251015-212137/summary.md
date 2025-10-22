@@ -153,7 +153,7 @@ Priority order for fixing:
 
 1. **High Priority** (blocks contributors):
 
-   - `.github/prompts/create-prompt-instructions.prompt.md` - clarify model field context
+   - `.github/prompts/prompt-file.instructions.prompt.md` - clarify model field context
    - Metadata correction needed for model field
 
 2. **Medium Priority** (reduces maintenance burden):

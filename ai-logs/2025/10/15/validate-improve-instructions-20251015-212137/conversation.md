@@ -65,7 +65,7 @@ Read and analyzed all instruction files:
 - ai-assisted-output.instructions.md (640 lines)
 - copilot-instructions.md (429 lines)
 - create-prompt.instructions.md (1679 lines)
-- instruction-prompt-requirements.instructions.md (266 lines)
+- instruction-prompt.instructions.md (266 lines)
 
 Performed comprehensive analysis across 7 categories:
 1. Conflicting Instructions
@@ -140,22 +140,22 @@ CRITICAL FIXES APPLIED:
 ✅ Issue #2: Incorrect Model Provenance
    - Fixed metadata in create-prompt.instructions.md
    - Changed: "github/copilot@2025-10-15" → "openai/gpt-4o@2024-11-20"
-   - Added source field: ".github/prompts/create-prompt-instructions.prompt.md"
+   - Added source field: ".github/prompts/prompt-file.instructions.prompt.md"
 
 ADDITIONAL FIXES:
 ✅ Issue #7: Missing Source Fields
-   - Added source field to instruction-prompt-requirements.instructions.md
+   - Added source field to instruction-prompt.instructions.md
    - Added complete front matter to ai-assisted-output.instructions.md (was missing entirely!)
    - All instruction files now have proper source field
 
 Files Modified:
 1. .github/instructions/create-prompt.instructions.md (critical clarification + metadata fix)
-2. .github/instructions/instruction-prompt-requirements.instructions.md (source field added)
+2. .github/instructions/instruction-prompt.instructions.md (source field added)
 3. .github/instructions/ai-assisted-output.instructions.md (front matter added)
 
 PLANNED FOR FUTURE (not fixing now per Option C):
 📋 Issue #3: Metadata duplication - scheduled for refactoring
-📋 Issue #6: Post-creation duplication - scheduled for refactoring  
+📋 Issue #6: Post-creation duplication - scheduled for refactoring
 ✔️ Issue #4: Terminology variance - accepted as minor
 ```
 
@@ -248,8 +248,8 @@ Three options proposed in validation report:
 [2025-10-16T09:00:00Z] johnmillerATcodemag-com
 
 ```text
-Issue #1 feedback: "Because there is no way of knowing what model was used, 
-Prompts should not use the Auto model. When creating a new prompt the default 
+Issue #1 feedback: "Because there is no way of knowing what model was used,
+Prompts should not use the Auto model. When creating a new prompt the default
 model from the copilot instructs should be used to set the model for the prompt."
 ```
 
@@ -277,8 +277,8 @@ CORRECTIVE ACTIONS TAKEN:
 4. Added clear explanation of why explicit format is required everywhere
 5. Updated validation report with corrected understanding
 
-The core issue was that I misunderstood the conflict - there should be 
-NO contexts where "Auto (copilot)" is acceptable because it breaks 
+The core issue was that I misunderstood the conflict - there should be
+NO contexts where "Auto (copilot)" is acceptable because it breaks
 provenance tracking.
 ```
 
@@ -302,11 +302,12 @@ provenance tracking.
 
 ## Critical Learning
 
-**Lesson**: When dealing with AI provenance, there are NO contexts where losing 
+**Lesson**: When dealing with AI provenance, there are NO contexts where losing
 model identity is acceptable. "Auto (copilot)" should NEVER be used because:
+
 1. AI models have no introspection capability
 2. Without explicit specification, audit trail is broken
 3. Reproducibility requires knowing exact model used
 
-**Corrected Standard**: ALL files (prompts and generated artifacts) must use 
+**Corrected Standard**: ALL files (prompts and generated artifacts) must use
 explicit model format: `"<provider>/<model-name>@<version>"`
