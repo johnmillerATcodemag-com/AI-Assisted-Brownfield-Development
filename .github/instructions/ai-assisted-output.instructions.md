@@ -155,7 +155,7 @@ source: "<source-identifier>" # Who/what created this file: username, prompt pat
 - Examples:
   - `"openai/gpt-4o@2024-11-20"` - If using GPT-4o (via Copilot, API, or ChatGPT)
   - `"openai/gpt-4-turbo@2024-04-09"` - If using GPT-4 Turbo
-  - `"openai/o1-preview@2024-09-12"` - If using o1-preview
+  - `"openai/o1@2024-12-17"` - If using o1 reasoning model (stable)
   - `"anthropic/claude-3.5-sonnet@2024-10-22"` - If using Claude 3.5 Sonnet
   - `"anthropic/claude-3-opus@2024-02-29"` - If using Claude 3 Opus
   - `"google/gemini-1.5-pro@2024-02"` - If using Gemini Pro
