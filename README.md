@@ -47,6 +47,10 @@ This repository enforces provenance and logging for any AI-assisted outputs (cod
 
 - [`.github/prompts/meta/create-instruction-prompt.prompt.md`](.github/prompts/meta/create-instruction-prompt.prompt.md) — Generates new instruction-generating prompts with AI provenance built-in ([chat log](ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md))
 
+### Instruction-Generating Prompts
+
+- [`.github/prompts/create-chatmode-instructions.prompt.md`](.github/prompts/create-chatmode-instructions.prompt.md) — Generates comprehensive authoring guidelines for creating custom GitHub Copilot chat modes
+
 ### Notable Artifacts
 
 - **Prompt Authoring Instructions** ([`.github/instructions/create-prompt.instructions.md`](.github/instructions/create-prompt.instructions.md))
