@@ -2,7 +2,7 @@
 ai_generated: true
 model: "openai/gpt-4o@2024-11-20"
 operator: "johnmillerATcodemag-com"
-chat_id: "create-prompt-instructions-2025-10-15"
+chat_id: "prompt-file.instructions-2025-10-15"
 prompt: |
   Consolidate all Copilot-specific instructions into a single copilot-instructions.md file
   that can be referenced from other meta-prompts, prompts, and instruction files.
@@ -14,7 +14,7 @@ task_durations:
   - task: "file creation"
     duration: "00:05:00"
 total_duration: "00:15:00"
-ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
+ai_log: "ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md"
 source: "johnmillerATcodemag-com"
 applyTo: "**/*"
 ---
@@ -60,6 +60,7 @@ This document provides comprehensive instructions for GitHub Copilot when workin
 #### Why Models Cannot Self-Detect
 
 **Critical Limitation**: AI models have NO ability to reliably detect their own identity because:
+
 - No introspection API exists
 - Interfaces (GitHub Copilot, etc.) don't pass model identity to the model
 - Any attempt to "guess" results in hallucination
@@ -163,7 +164,7 @@ source: "<source-identifier>" # 11. What created this file
 The `source` field identifies what created the file:
 
 - **User-created**: `"<github-username>"` (e.g., `"johnmillerATcodemag-com"`)
-- **Prompt-generated**: `"<path-to-prompt-file>"` (e.g., `".github/prompts/create-prompt-instructions.prompt.md"`)
+- **Prompt-generated**: `"<path-to-prompt-file>"` (e.g., `".github/prompts/prompt-file.instructions.prompt.md"`)
 - **Meta-prompt-generated**: `"<path-to-meta-prompt-file>"` (e.g., `".github/prompts/meta/create-instruction-prompt.prompt.md"`)
 
 ### Optional Fields
@@ -251,7 +252,7 @@ Add appropriate entry to `README.md`:
 
 - **Format**: `<action>-<domain>.prompt.md`
 - **Examples**:
-  - `create-prompt-instructions.prompt.md`
+  - `prompt-file.instructions.prompt.md`
   - `generate-api-docs.prompt.md`
   - `analyze-code-quality.prompt.md`
 
@@ -418,7 +419,7 @@ For complete requirements, see:
 
 - **AI Provenance Policy**: `.github/instructions/ai-assisted-output.instructions.md`
 - **Prompt Authoring**: `.github/instructions/create-prompt.instructions.md`
-- **Instruction Prompt Requirements**: `.github/instructions/instruction-prompt-requirements.instructions.md`
+- **Instruction Prompt Requirements**: `.github/instructions/instruction-prompt.instructions.md`
 
 ---
 

@@ -2,7 +2,7 @@
 ai_generated: true
 model: "openai/gpt-4o@2024-11-20"
 operator: "johnmillerATcodemag-com"
-chat_id: "create-prompt-instructions-2025-10-15"
+chat_id: "prompt-file.instructions-2025-10-15"
 prompt: |
   Create a comprehensive prompt file that will generate detailed authoring guidelines
   for creating effective repository prompts following established standards.
@@ -14,14 +14,14 @@ task_durations:
   - task: "metadata configuration"
     duration: "00:05:00"
 total_duration: "00:15:00"
-ai_log: "ai-logs/2025/10/15/create-prompt-instructions-2025-10-15/conversation.md"
+ai_log: "ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md"
 source: "johnmillerATcodemag-com"
 mode: agent
 model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["create"]
 description: Generates comprehensive Markdown authoring guidelines for creating effective repository prompts
 prompt_metadata:
-  id: create-prompt-instructions-prompt
+  id: prompt-file.instructions-prompt
   title: Generate Prompt Authoring Instructions (Markdown)
   owner: johnmillerATcodemag-com
   repository: AI-Assisted-Brownfield-Development
@@ -235,7 +235,7 @@ task_durations:
     duration: "<hh:mm:ss>"
 total_duration: "<hh:mm:ss>"
 ai_log: "ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md"
-source: ".github/prompts/create-prompt-instructions.prompt.md"
+source: ".github/prompts/prompt-file.instructions.prompt.md"
 applyTo: "**/*.prompt.md"
 ---
 ```

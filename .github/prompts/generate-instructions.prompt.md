@@ -41,7 +41,7 @@ First, analyze the codebase to identify:
 
 ## Instruction File Generation
 
-Generate instruction files in the `.github/instructions/generated` directory with the following structure:
+Generate instruction files in the `.github/instructions` directory with the following structure:
 
 ### General Instructions (Root Level)
 
