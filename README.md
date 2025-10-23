@@ -48,6 +48,16 @@ This repository enforces provenance and logging for any AI-assisted outputs (cod
 - [`.github/instructions/instruction-prompt.instructions.md`](.github/instructions/instruction-prompt.instructions.md) — Requirements for prompts that generate instruction files ([chat log](ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md))
 - [`.github/instructions/vertical-slice-architecture.instructions.md`](.github/instructions/vertical-slice-architecture.instructions.md) — Comprehensive guide for implementing vertical slice architecture with feature-centric code organization ([chat log](ai-logs/2025/10/22/vertical-slice-instructions-20251022/conversation.md))
 
+### Custom GitHub Copilot Chat Modes
+
+Custom chat modes are specialized AI assistants that extend GitHub Copilot's capabilities for specific domains and workflows. Activate with `@<modename>` in GitHub Copilot chat.
+
+- [`.github/chatmodes/DocumentationUpdater.chatmode.md`](.github/chatmodes/DocumentationUpdater.chatmode.md) — Documentation maintenance, accuracy verification, and continuous improvement ([chat log](ai-logs/2025/10/22/create-documentation-updater-chatmode-20251022/conversation.md))
+- [`.github/chatmodes/DocDesignArchitect.chatmode.md`](.github/chatmodes/DocDesignArchitect.chatmode.md) — Technical documentation, diagramming with Mermaid, and readability improvements
+- [`.github/chatmodes/SecurityAnalyzer.chatmode.md`](.github/chatmodes/SecurityAnalyzer.chatmode.md) — Code security analysis, vulnerability detection, and automated issue creation
+- [`.github/chatmodes/codebase-explorer.chatmode.md`](.github/chatmodes/codebase-explorer.chatmode.md) — Rapid codebase understanding and evaluation
+- [`.github/chatmodes/GitFlowStrategist.chatmode.md`](.github/chatmodes/GitFlowStrategist.chatmode.md) — Branching policies, merge style enforcement, and CI/CD hygiene
+
 ### Meta-Prompts (Prompt Generators)
 
 - [`.github/prompts/meta/create-instruction-prompt.prompt.md`](.github/prompts/meta/create-instruction-prompt.prompt.md) — Generates new instruction-generating prompts with AI provenance built-in ([chat log](ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md))
