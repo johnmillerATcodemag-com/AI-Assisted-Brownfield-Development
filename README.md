@@ -1,4 +1,4 @@
-# AI-Assisted Brownfield Development
+# AI-Assisted Software Development
 
 This repo was created for the 2025 Next Gen AI Conference Leveraging AI for Legacy Code Refactoring session
 
@@ -40,6 +40,7 @@ This repository enforces provenance and logging for any AI-assisted outputs (cod
 
 - [`.github/instructions/ai-assisted-output.instructions.md`](.github/instructions/ai-assisted-output.instructions.md) — How to generate AI-assisted outputs with required metadata, logging, and CI enforcement
 - [`.github/instructions/copilot-instructions.md`](.github/instructions/copilot-instructions.md) — **GitHub Copilot Users Start Here** - Comprehensive Copilot-specific guidance for model format, conversation logging, and quality standards ([chat log](ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md))
+- [`.github/instructions/create-chatmode.instructions.md`](.github/instructions/create-chatmode.instructions.md) — Comprehensive authoring guidelines for creating custom GitHub Copilot chat modes ([chat log](ai-logs/2025/10/21/create-chatmode-instructions-20251021/conversation.md))
 - [`.github/instructions/create-prompt.instructions.md`](.github/instructions/create-prompt.instructions.md) — Comprehensive guidelines for authoring effective repository prompts ([chat log](ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md))
 - [`.github/instructions/instruction-prompt.instructions.md`](.github/instructions/instruction-prompt.instructions.md) — Requirements for prompts that generate instruction files ([chat log](ai-logs/2025/10/15/prompt-file.instructions-2025-10-15/conversation.md))
 
