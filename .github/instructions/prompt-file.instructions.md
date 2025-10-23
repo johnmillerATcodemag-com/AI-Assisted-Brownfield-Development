@@ -137,7 +137,7 @@ mode: chat   # Interactive Q&A session
 - Examples:
   - `"openai/gpt-4o@2024-11-20"` - GPT-4o
   - `"anthropic/claude-3.5-sonnet@2024-10-22"` - Claude 3.5 Sonnet (RECOMMENDED DEFAULT)
-  - `"openai/o1-preview@2024-09-12"` - o1-preview (for reasoning tasks)
+  - `"openai/o1@2024-12-17"` - o1 reasoning model (stable)
 
 **Examples**:
 
@@ -147,6 +147,9 @@ model: "anthropic/claude-3.5-sonnet@2024-10-22"  # Recommended default
 
 # Alternative if you know you're using GPT-4o
 model: "openai/gpt-4o@2024-11-20"
+
+# For reasoning tasks with o1
+model: "openai/o1@2024-12-17"
 
 # ❌ WRONG - loses provenance tracking
 # model: Auto (copilot)

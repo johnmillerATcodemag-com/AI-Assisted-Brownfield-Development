@@ -43,7 +43,7 @@ This document provides comprehensive instructions for GitHub Copilot when workin
 - **Examples**:
   - `"openai/gpt-4o@2024-11-20"` - GPT-4o (latest)
   - `"openai/gpt-4-turbo@2024-04-09"` - GPT-4 Turbo
-  - `"openai/o1-preview@2024-09-12"` - o1-preview reasoning model
+  - `"openai/o1@2024-12-17"` - o1 reasoning model (stable)
   - `"anthropic/claude-3.5-sonnet@2024-10-22"` - Claude 3.5 Sonnet (RECOMMENDED DEFAULT)
   - `"anthropic/claude-3-opus@2024-02-29"` - Claude 3 Opus
   - `"google/gemini-1.5-pro@2024-02"` - Gemini 1.5 Pro
