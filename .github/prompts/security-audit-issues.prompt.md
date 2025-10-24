@@ -1,6 +1,6 @@
 ---
 description: "Analyze the codebase for security concerns and generate GitHub-issue-ready findings with severity and remediation"
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["search", "edit", "fetch"]
 mode: agent
 ---

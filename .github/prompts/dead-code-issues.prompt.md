@@ -1,6 +1,6 @@
 ---
 description: "Detect dead code (unused files, exports, functions) and generate GitHub-issue-ready findings with remediation"
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["search", "edit", "fetch"]
 mode: agent
 ---

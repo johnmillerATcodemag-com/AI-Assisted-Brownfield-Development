@@ -1,6 +1,6 @@
 ---
 description: "Identify and prioritize tests needed to verify a successful migration to Vue 3.4 (components, router, store, and critical flows)"
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["search", "edit", "fetch"]
 mode: agent
 ---

@@ -1,6 +1,6 @@
 ---
 description: "Analyze current codebase and identify missing tests, with prioritized recommendations and coverage targets"
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["search", "edit", "fetch"]
 mode: agent
 ---
