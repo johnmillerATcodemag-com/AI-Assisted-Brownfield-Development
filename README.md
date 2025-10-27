@@ -81,3 +81,35 @@ Custom chat modes are specialized AI assistants that extend GitHub Copilot's cap
   - Status: Critical fixes applied (Option C executed - 4 issues resolved, 3 deferred for refactoring)
   - Provenance: [Chat log](ai-logs/2025/10/15/validate-improve-instructions-20251015-212137/conversation.md) | [Summary](ai-logs/2025/10/15/validate-improve-instructions-20251015-212137/summary.md)
   - Verification: [Fixes verified 2025-10-16](validation-fixes-verified-20251016.md) ([chat log](ai-logs/2025/10/16/resume-validation-fixes-20251016/conversation.md))
+
+## Utility Scripts
+
+This repository includes utility scripts for repository management and maintenance:
+
+### Branch Change Tracking
+
+Identify branches with changes that haven't been merged to main:
+
+- **Bash:** [`scripts/check_unmerged_branches.sh`](scripts/check_unmerged_branches.sh) - For Linux/Mac/WSL
+- **PowerShell:** [`scripts/check_unmerged_branches.ps1`](scripts/check_unmerged_branches.ps1) - For Windows/PowerShell Core
+
+**Usage:**
+```bash
+# Bash
+./scripts/check_unmerged_branches.sh
+
+# PowerShell
+.\scripts\check_unmerged_branches.ps1
+```
+
+See [`scripts/README.md`](scripts/README.md) for detailed documentation and configuration options.
+
+### Security Issue Management
+
+Scripts for managing GitHub security issues:
+
+- `close_duplicate_security_issues.ps1` - Close duplicate security issues
+- `close_latest_security_issues.ps1` - Close latest security issues  
+- `close_new_security_issues.ps1` - Close new security issues
+- `close_resolved_security_issues.ps1` - Close resolved security issues
+- `emergency_security_cleanup.ps1` - Emergency security cleanup
