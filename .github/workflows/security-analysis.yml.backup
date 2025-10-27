@@ -1,0 +1,236 @@
+name: Security Analysis and Issue Creation
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    # Run security scan weekly on Mondays at 2 AM UTC
+    - cron: "0 2 * * 1"
+  workflow_dispatch:
+    inputs:
+      scan_type:
+        description: "Type of security scan to run"
+        required: true
+        default: "full"
+        type: choice
+        options:
+          - full
+          - critical-only
+          - dependencies-only
+          - owasp-top10
+      create_issues:
+        description: "Create GitHub issues for findings"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+  issues: write
+  security-events: write
+  pull-requests: write
+
+jobs:
+  security-analysis:
+    name: Security Vulnerability Analysis
+    runs-on: ubuntu-latest
+
+    outputs:
+      vulnerabilities-found: ${{ steps.scan-results.outputs.vulnerabilities-found }}
+      critical-count: ${{ steps.scan-results.outputs.critical-count }}
+      high-count: ${{ steps.scan-results.outputs.high-count }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js (if applicable)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+        if: hashFiles('**/package.json') != ''
+
+      - name: Set up Python (if applicable)
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "pip"
+        if: hashFiles('**/requirements.txt') != '' || hashFiles('**/pyproject.toml') != ''
+
+      - name: Set up .NET (if applicable)
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "8.0"
+        if: hashFiles('**/*.csproj') != '' || hashFiles('**/*.sln') != ''
+
+      - name: Install dependencies
+        run: |
+          # Install security scanning tools
+          npm install -g npm-audit-resolver @cyclonedx/bom
+          pip install --upgrade pip bandit safety semgrep
+
+          # Install project dependencies if they exist
+          if [ -f "package.json" ]; then
+            npm ci
+          fi
+
+          if [ -f "requirements.txt" ]; then
+            pip install -r requirements.txt
+          fi
+
+          if [ -f "pyproject.toml" ]; then
+            pip install .
+          fi
+
+      - name: Run SAST Analysis with Semgrep
+        id: semgrep-scan
+        run: |
+          echo "Running Semgrep SAST analysis..."
+          semgrep --config=auto --json --output=semgrep-results.json . || true
+
+          # Convert results to readable format
+          semgrep --config=auto --text . > semgrep-report.txt || true
+
+          echo "semgrep-completed=true" >> $GITHUB_OUTPUT
+
+      - name: Analyze Dependencies for Vulnerabilities
+        id: dependency-scan
+        run: |
+          echo "Scanning dependencies for known vulnerabilities..."
+
+          # NPM Audit for Node.js projects
+          if [ -f "package.json" ]; then
+            npm audit --audit-level=moderate --json > npm-audit-results.json || true
+            echo "npm-scan-completed=true" >> $GITHUB_OUTPUT
+          fi
+
+          # Safety check for Python projects
+          if [ -f "requirements.txt" ] || [ -f "pyproject.toml" ]; then
+            safety check --json > python-safety-results.json || true
+            echo "python-scan-completed=true" >> $GITHUB_OUTPUT
+          fi
+
+          # Bandit for Python security issues
+          if find . -name "*.py" -type f | grep -q .; then
+            bandit -r . -f json -o bandit-results.json || true
+            echo "bandit-scan-completed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run Custom Security Checks
+        id: custom-checks
+        run: |
+          echo "Running custom security pattern analysis..."
+          python .github/scripts/security_scanner.py
+          echo "custom-scan-completed=true" >> $GITHUB_OUTPUT
+
+      - name: Analyze Scan Results
+        id: scan-results
+        run: |
+          echo "Analyzing all security scan results..."
+
+          # Initialize counters
+          total_vulnerabilities=0
+          critical_count=0
+          high_count=0
+          medium_count=0
+          low_count=0
+
+          # Process Semgrep results
+          if [ -f "semgrep-results.json" ]; then
+            semgrep_count=$(jq '.results | length' semgrep-results.json 2>/dev/null || echo "0")
+            total_vulnerabilities=$((total_vulnerabilities + semgrep_count))
+            echo "Semgrep found $semgrep_count issues"
+          fi
+
+          # Process custom security results
+          if [ -f "custom-security-results.json" ]; then
+            custom_critical=$(jq '.summary.critical' custom-security-results.json 2>/dev/null || echo "0")
+            custom_high=$(jq '.summary.high' custom-security-results.json 2>/dev/null || echo "0")
+            custom_medium=$(jq '.summary.medium' custom-security-results.json 2>/dev/null || echo "0")
+            custom_low=$(jq '.summary.low' custom-security-results.json 2>/dev/null || echo "0")
+
+            critical_count=$((critical_count + custom_critical))
+            high_count=$((high_count + custom_high))
+            medium_count=$((medium_count + custom_medium))
+            low_count=$((low_count + custom_low))
+
+            custom_total=$(jq '.summary.total' custom-security-results.json 2>/dev/null || echo "0")
+            total_vulnerabilities=$((total_vulnerabilities + custom_total))
+          fi
+
+          # Set outputs
+          echo "vulnerabilities-found=$total_vulnerabilities" >> $GITHUB_OUTPUT
+          echo "critical-count=$critical_count" >> $GITHUB_OUTPUT
+          echo "high-count=$high_count" >> $GITHUB_OUTPUT
+          echo "medium-count=$medium_count" >> $GITHUB_OUTPUT
+          echo "low-count=$low_count" >> $GITHUB_OUTPUT
+
+          echo "Total vulnerabilities found: $total_vulnerabilities"
+          echo "Critical: $critical_count, High: $high_count, Medium: $medium_count, Low: $low_count"
+
+      - name: Upload Security Reports as Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-reports
+          path: |
+            *-results.json
+            *-report.txt
+          retention-days: 30
+
+  create-security-issues:
+    name: Create GitHub Issues for Security Findings
+    runs-on: ubuntu-latest
+    needs: security-analysis
+    if: needs.security-analysis.outputs.vulnerabilities-found > 0 && (github.event.inputs.create_issues == 'true' || github.event.inputs.create_issues == '')
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Security Reports
+        uses: actions/download-artifact@v4
+        with:
+          name: security-reports
+
+      - name: Set up Python for Issue Creation
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          pip install PyGithub requests
+
+      - name: Create GitHub Issues for Security Findings
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: python .github/scripts/create_security_issues.py
+
+  notify-security-team:
+    name: Notify Security Team
+    runs-on: ubuntu-latest
+    needs: [security-analysis, create-security-issues]
+    if: needs.security-analysis.outputs.critical-count > 0 || needs.security-analysis.outputs.high-count > 0
+
+    steps:
+      - name: Send Security Alert
+        run: |
+          echo "🚨 SECURITY ALERT 🚨"
+          echo "Critical vulnerabilities found: ${{ needs.security-analysis.outputs.critical-count }}"
+          echo "High severity vulnerabilities found: ${{ needs.security-analysis.outputs.high-count }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Action URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          # Here you could integrate with Slack, Teams, or email notifications
+          # Example Slack webhook (uncomment and configure):
+          # curl -X POST -H 'Content-type: application/json' \
+          #   --data '{"text":"🚨 Security Alert: ${{ needs.security-analysis.outputs.critical-count }} critical and ${{ needs.security-analysis.outputs.high-count }} high severity vulnerabilities found in ${{ github.repository }}"}' \
+          #   ${{ secrets.SLACK_WEBHOOK_URL }}

@@ -1,4 +1,4 @@
-# PowerShell script to close the newly generated security issues (447-526+) 
+# PowerShell script to close the newly generated security issues (447-526+)
 # These issues were created due to a faulty security scanner that ignored exclusions
 
 param(
@@ -20,7 +20,7 @@ if ($DryRun) {
 }
 
 Write-Host "Root Cause: Security scanner was ignoring exclusion configurations" -ForegroundColor Red
-Write-Host "- Scanner was not respecting SECURITY_TEST_IGNORE markers" -ForegroundColor Red  
+Write-Host "- Scanner was not respecting SECURITY_TEST_IGNORE markers" -ForegroundColor Red
 Write-Host "- Scanner was not excluding security-analysis directory" -ForegroundColor Red
 Write-Host "- Scanner was creating duplicate issues for already fixed patterns" -ForegroundColor Red
 Write-Host ""
@@ -49,7 +49,7 @@ if (-not $DryRun) {
 **Root Cause**: The security scanner was ignoring exclusion configurations and SECURITY_TEST_IGNORE markers, causing it to repeatedly create issues for intentionally vulnerable test files.
 
 **Resolution**: Updated security scanner (`.github/scripts/security_scanner.py`) to properly:
-- Exclude the `security-analysis/` directory containing intentional test vulnerabilities  
+- Exclude the `security-analysis/` directory containing intentional test vulnerabilities
 - Respect `SECURITY_TEST_IGNORE:` markers in code comments
 - Skip files marked with fake/demo credentials patterns
 
@@ -66,7 +66,7 @@ All original 25 security issues were previously resolved with proper SECURITY_TE
                 Write-Host "  Processing issue #$issueNumber..." -ForegroundColor White
 
                 # Check if issue exists and is open
-                $issueInfo = gh issue view $issueNumber --json state,title 2>$null
+                $issueInfo = gh issue view $issueNumber --json state, title 2>$null
                 if ($LASTEXITCODE -eq 0) {
                     $issue = $issueInfo | ConvertFrom-Json
                     if ($issue.state -eq "OPEN" -and $issue.title -like "*SECURITY*") {
@@ -78,10 +78,12 @@ All original 25 security issues were previously resolved with proper SECURITY_TE
 
                         Write-Host "    ✓ Issue #$issueNumber closed successfully" -ForegroundColor Green
                         $successCount++
-                    } else {
+                    }
+                    else {
                         Write-Host "    - Issue #$issueNumber is already closed or not a security issue" -ForegroundColor Gray
                     }
-                } else {
+                }
+                else {
                     Write-Host "    - Issue #$issueNumber does not exist" -ForegroundColor Gray
                 }
 
