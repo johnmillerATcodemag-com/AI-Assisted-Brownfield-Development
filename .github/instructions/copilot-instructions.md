@@ -118,18 +118,18 @@ Create a new feature for...
 
 ### 3. New Chat = New Conversation File
 
-**CRITICAL**: Each new AI chat session MUST create a NEW conversation log file.
+**CRITICAL**: Each new AI chat MUST create a NEW conversation log file.
 
 #### Rules
 
 - ✅ Each chat gets unique `ai-logs/yyyy/mm/dd/<chat-id>/conversation.md`
 - ✅ Each chat gets unique `ai-logs/yyyy/mm/dd/<chat-id>/summary.md`
 - ❌ NEVER reuse or append to existing conversation files
-- ❌ NEVER share conversation files across multiple chat sessions
+- ❌ NEVER share conversation files across multiple chats
 
 #### Rationale
 
-- Prevents cross-contamination between sessions
+- Prevents cross-contamination between chats
 - Maintains clear provenance trail
 - Enables proper context isolation
 - Facilitates debugging and audit
