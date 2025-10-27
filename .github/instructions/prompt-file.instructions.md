@@ -1630,52 +1630,28 @@ Create a file at `examples/example.md` with "Hello, World!" content.
 
 ## Post-Creation Requirements
 
-After creating or modifying any `.prompt.md` file, you **MUST**:
+After creating or modifying any `.prompt.md` file, follow the AI chat logging workflow as defined in [`.github/instructions/ai/ai-assisted-output.instructions.md`](ai/ai-assisted-output.instructions.md#ai-chat-logging-workflow).
 
-### 1. Update AI Conversation Log
+### Prompt-Specific Requirements
 
-Add the new prompt file to the **Artifacts Produced** section of the relevant conversation log:
+**Update Conversation Log**:
+Add to `ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md`:
 
 ```markdown
 **Artifacts Produced**:
-
 - `.github/prompts/<path>/<filename>.prompt.md` - <Brief description of what the prompt does>
 ```
 
-**Location**: `ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md`
+**Update README.md**:
+Add entry to appropriate section based on prompt type:
 
-### 2. Update README.md
+- **Meta-prompts**: Add to "Meta-Prompts (Prompt Generators)" section
+- **Instruction-generating prompts**: Link to generated instruction file in "Guidance & Instructions"
+- **Other notable prompts**: Add to "Notable Artifacts" section
 
-Add an entry to the appropriate section in `README.md`:
+See examples in [README.md](../../README.md) for formatting.
 
-**For meta-prompts** (in `.github/prompts/meta/`):
-
-```markdown
-### Meta-Prompts (Prompt Generators)
-
-- [`.github/prompts/meta/<filename>.prompt.md`](.github/prompts/meta/<filename>.prompt.md) — <Description> ([chat log](ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md))
-```
-
-**For instruction-generating prompts**:
-
-```markdown
-### Guidance & Instructions
-
-- [`.github/instructions/<filename>.instructions.md`](.github/instructions/<filename>.instructions.md) — <Description> ([chat log](ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md))
-```
-
-**For other notable prompts**:
-
-```markdown
-### Notable Artifacts
-
-- **<Artifact Title>** ([`.github/prompts/<path>/<filename>.prompt.md`](.github/prompts/<path>/<filename>.prompt.md))
-  - <Description>
-  - Generated from: <source-prompt-if-applicable>
-  - Provenance: [Chat log](ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md)
-```
-
-### 3. Verification Checklist
+### Verification Checklist
 
 Before completing your work, verify:
 
@@ -1686,14 +1662,7 @@ Before completing your work, verify:
 - [ ] All links are valid and use correct relative paths
 - [ ] Description is clear and concise
 
-### Why This Matters
-
-These requirements ensure:
-
-- **Traceability**: Every prompt can be traced to its creation conversation
-- **Discoverability**: Contributors can find prompts via README
-- **Provenance**: Complete audit trail of AI-assisted work
-- **Compliance**: Adherence to `.github/instructions/ai-assisted-output.instructions.md`
+See [complete post-creation workflow](ai/ai-assisted-output.instructions.md#ai-chat-logging-workflow) for detailed requirements and policy compliance.
 
 ---
 
