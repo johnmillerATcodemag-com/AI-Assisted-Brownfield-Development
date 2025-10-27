@@ -136,107 +136,57 @@ Create a new feature for...
 
 ## AI Provenance Metadata Requirements
 
-### Required Fields (All 11)
+All AI-generated artifacts must include complete provenance metadata as defined in [`.github/instructions/ai/ai-assisted-output.instructions.md`](.github/instructions/ai/ai-assisted-output.instructions.md#required-provenance-metadata-for-every-ai-assisted-artifact).
 
-Every AI-generated artifact MUST include:
+### Copilot-Specific Requirements
 
-```yaml
----
-ai_generated: true # 1. Boolean flag
-model: "<provider>/<model>@<version>" # 2. Underlying AI model
-operator: "<github-username>" # 3. Who initiated the work
-chat_id: "<unique-chat-identifier>" # 4. Chat session ID
-prompt: | # 5. Exact prompt text
-  <exact-prompt-text>
-started: "<ISO8601-timestamp>" # 6. Start time
-ended: "<ISO8601-timestamp>" # 7. End time
-task_durations: # 8. Task breakdown
-  - task: "<task-name>"
-    duration: "<hh:mm:ss>"
-total_duration: "<hh:mm:ss>" # 9. Total time
-ai_log: "ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md" # 10. Log path
-source: "<source-identifier>" # 11. What created this file
----
-```
+When using GitHub Copilot, follow these specific guidelines:
 
-### Source Field Values
+**Model Field**:
+- Use the **underlying AI model** format: `"<provider>/<model-name>@<version>"`
+- Examples: `"openai/gpt-4o@2024-11-20"`, `"anthropic/claude-3.5-sonnet@2024-10-22"`
+- ❌ NOT the interface name like "github/copilot"
 
-The `source` field identifies what created the file:
+**Operator Field**:
+- Use your GitHub username (e.g., `"johnmillerATcodemag-com"`)
 
+**Chat ID**:
+- Use Copilot's generated chat identifier
+- Copilot should auto-generate this at chat start
+
+**Source Field Values**:
 - **User-created**: `"<github-username>"` (e.g., `"johnmillerATcodemag-com"`)
 - **Prompt-generated**: `"<path-to-prompt-file>"` (e.g., `".github/prompts/prompt-file.instructions.prompt.md"`)
 - **Meta-prompt-generated**: `"<path-to-meta-prompt-file>"` (e.g., `".github/prompts/meta/create-instruction-prompt.prompt.md"`)
 
-### Optional Fields
-
-```yaml
-applyTo: "<glob-pattern>" # For instruction files - when to auto-apply
-interface: "GitHub Copilot" # Optional: note the interface used
-context: "<additional-context>" # Optional: extra provenance details
-```
+See [complete field definitions and requirements](ai/ai-assisted-output.instructions.md#required-provenance-metadata-for-every-ai-assisted-artifact) in the canonical AI-assisted output policy.
 
 ## Post-Creation Requirements
 
-After creating or modifying ANY file, you MUST:
+After creating or modifying ANY file, follow the AI chat logging workflow as defined in [`.github/instructions/ai/ai-assisted-output.instructions.md`](ai/ai-assisted-output.instructions.md#ai-chat-logging-workflow).
 
-### 1. Update AI Conversation Log
+### Copilot-Specific Automation
 
-Add to `ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md`:
+GitHub Copilot should automatically:
 
+1. **Update Conversation Log**: Add artifacts to `ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md`
+2. **Generate/Update Summary**: Create or update `summary.md` with session overview
+3. **Prompt for README Update**: Remind user to add entry to `README.md` for notable artifacts
+
+### Quick Reference
+
+**Add to conversation.md**:
 ```markdown
 **Artifacts Produced**:
-
 - `<path-to-file>` - <Brief description>
 ```
 
-### 2. Update or Create Summary
-
-Ensure `ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/summary.md` exists with:
-
-- Session objectives
-- Work completed
-- Key decisions
-- Artifacts produced
-- Next steps
-- Compliance status
-
-**Resumability**: Summary MUST contain enough context for another developer to:
-
-- Understand original objectives
-- See what was accomplished
-- Identify key decisions and rationale
-- Locate all artifacts
-- Resume incomplete work
-
-### 3. Update README.md
-
-Add appropriate entry to `README.md`:
-
-**For meta-prompts**:
-
+**Add to README.md** (for notable artifacts):
 ```markdown
-### Meta-Prompts (Prompt Generators)
-
-- [`.github/prompts/meta/<name>.prompt.md`](...) — <Description> ([chat log](...))
-```
-
-**For instruction files**:
-
-```markdown
-### Guidance & Instructions
-
 - [`.github/instructions/<name>.instructions.md`](...) — <Description> ([chat log](...))
 ```
 
-**For notable artifacts**:
-
-```markdown
-### Notable Artifacts
-
-- **<Title>** ([`<path>`](...))
-  - <Description>
-  - Provenance: [Chat log](...)
-```
+See [complete post-creation workflow](ai/ai-assisted-output.instructions.md#ai-chat-logging-workflow) for detailed requirements.
 
 ## File Naming Conventions
 

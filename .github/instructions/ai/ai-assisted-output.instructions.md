@@ -86,6 +86,8 @@ Contributors generating or curating AI-assisted content (code, docs, diagrams, t
 
 ## Required provenance metadata (for every AI-assisted artifact)
 
+**🔒 CANONICAL SOURCE**: This section is the single source of truth for AI provenance metadata requirements. Other instruction files should reference this section rather than duplicating it.
+
 Authors must attach or embed the following metadata near the top of the artifact, following the [Metadata placement policy](#metadata-placement-policy):
 
 Conceptual fields (map to YAML when embedding):
@@ -165,6 +167,8 @@ source: "<source-identifier>" # Who/what created this file: username, prompt pat
 For other file formats, adapt the structure using appropriate comment syntax; for non-embeddable formats, see [Metadata placement policy](#metadata-placement-policy).
 
 ## AI chat logging workflow
+
+**🔒 CANONICAL SOURCE**: This section is the single source of truth for the AI chat logging workflow and post-creation requirements. Other instruction files should reference this section rather than duplicating it.
 
 All AI chat transcripts and key outputs must be saved under `ai-logs/` in a date- and chat-structured layout.
 
