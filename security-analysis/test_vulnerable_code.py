@@ -37,20 +37,23 @@ def get_user_data(user_id):
     conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     # Vulnerable: Direct string concatenation in SQL query
-    query = "SELECT * FROM users WHERE id = " + user_id
+    # SECURITY_TEST_IGNORE: Intentional SQL injection for security testing - Issue #459
+    query = "SELECT * FROM users WHERE id = " + user_id  # FAKE-DEMO-sql-injection for vulnerability testing
     cursor.execute(query)
     return cursor.fetchall()
 
 # Example 3: Weak cryptographic algorithm (MEDIUM severity - CWE-327)
 def hash_password(password):
     # Vulnerable: Using MD5 for password hashing
-    return hashlib.md5(password.encode()).hexdigest()
+    # SECURITY_TEST_IGNORE: Intentional MD5 usage for security testing - Issue #460
+    return hashlib.md5(password.encode()).hexdigest()  # FAKE-DEMO-md5 for vulnerability testing
 
 def generate_session_id():
     # Vulnerable: Using SHA1 which is cryptographically weak
+    # SECURITY_TEST_IGNORE: Intentional SHA1 usage for security testing - Issue #461
     import random
     data = str(random.random())
-    return hashlib.sha1(data.encode()).hexdigest()
+    return hashlib.sha1(data.encode()).hexdigest()  # FAKE-DEMO-sha1 for vulnerability testing
 
 # Example 4: XSS vulnerability (MEDIUM severity - CWE-79)
 app = Flask(__name__)
@@ -97,7 +100,8 @@ def process_file(filename):
 
 def backup_database(db_name):
     # Vulnerable: Command injection through user input
-    os.system(f'mysqldump {db_name} > backup.sql')
+    # SECURITY_TEST_IGNORE: Intentional command injection for security testing - Issue #468
+    os.system(f'mysqldump {db_name} > backup.sql')  # FAKE-DEMO-command-injection for vulnerability testing
 
 # Example 7: Path traversal vulnerability (HIGH severity - CWE-22)
 def read_config_file(config_name):
@@ -121,12 +125,14 @@ def serve_file(filename):
 
 def generate_password_reset_token():
     # Vulnerable: Using math.random for security-sensitive operations
-    token = str(math.floor(random.random() * 1000000))
+    # SECURITY_TEST_IGNORE: Intentional weak random usage for security testing - Issue #456
+    token = str(math.floor(random.random() * 1000000))  # FAKE-DEMO-weak-random for vulnerability testing
     return token
 
 def create_session_token():
     # Vulnerable: Predictable random seed
-    random.seed(1234)
+    # SECURITY_TEST_IGNORE: Intentional predictable seed for security testing - Issue #456
+    random.seed(1234)  # FAKE-DEMO-predictable-seed for vulnerability testing
     return str(random.randint(1000000, 9999999))
 
 # Example 9: Debug mode in production (MEDIUM severity - CWE-489)
