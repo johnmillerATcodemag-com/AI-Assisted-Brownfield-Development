@@ -86,6 +86,8 @@ Contributors generating or curating AI-assisted content (code, docs, diagrams, t
 
 ## Required provenance metadata (for every AI-assisted artifact)
 
+**🔒 CANONICAL SOURCE**: This section is the single source of truth for AI provenance metadata requirements. Other instruction files should reference this section rather than duplicating it.
+
 Authors must attach or embed the following metadata near the top of the artifact, following the [Metadata placement policy](#metadata-placement-policy):
 
 Conceptual fields (map to YAML when embedding):
@@ -166,9 +168,11 @@ For other file formats, adapt the structure using appropriate comment syntax; fo
 
 ## AI chat logging workflow
 
+**🔒 CANONICAL SOURCE**: This section is the single source of truth for the AI chat logging workflow and post-creation requirements. Other instruction files should reference this section rather than duplicating it.
+
 All AI chat transcripts and key outputs must be saved under `ai-logs/` in a date- and chat-structured layout.
 
-**CRITICAL**: Each new AI chat session MUST create a NEW conversation log file. Do NOT reuse or append to existing conversation files from previous sessions.
+**CRITICAL**: Each new AI chat MUST create a NEW conversation log file. Do NOT reuse or append to existing conversation files from previous chats.
 
 - Base folder: `ai-logs/`
 - Structure: `ai-logs/yyyy/mm/dd/<chat-id>/`
@@ -269,7 +273,7 @@ Implementation Requirements for Copilot:
 
 ## Objective
 
-<Clear statement of what the session aimed to accomplish>
+<Clear statement of what the chat aimed to accomplish>
 
 ## Work Completed
 
@@ -338,10 +342,10 @@ Implementation Requirements for Copilot:
 ⚠️ <Partial compliance or known gap>
 ❌ <Non-compliant item requiring attention>
 
-## Session Metadata
+## Chat Metadata
 
 ```yaml
-session_id: <chat-id>
+chat_id: <chat-id>
 started: <ISO8601-timestamp>
 ended: <ISO8601-timestamp>
 total_duration: <hh:mm:ss>
@@ -359,7 +363,7 @@ files_modified: <number>
 **Format**: Markdown
 ````
 
-**Note**: The summary.md file should be created at the end of each AI-assisted session and saved alongside conversation.md. It provides a high-level overview for quick reference without reading the full conversation transcript.
+**Note**: The summary.md file should be created at the end of each AI-assisted chat and saved alongside conversation.md. It provides a high-level overview for quick reference without reading the full conversation transcript.
 
 **Resumability Requirements**: The summary MUST contain sufficient context for another developer (or the same developer at a later time) to:
 
@@ -370,7 +374,7 @@ files_modified: <number>
 5. Know what files were modified and why
 6. Resume work on incomplete items without re-reading the full conversation
 
-Include enough detail that someone unfamiliar with the session can understand the "why" behind decisions, not just the "what" of artifacts created.## Capturing task durations
+Include enough detail that someone unfamiliar with the chat can understand the "why" behind decisions, not just the "what" of artifacts created.## Capturing task durations
 
 - Record the start and end timestamps for each significant task (e.g., drafting, refactor, diagram generation, test updates).
 - Compute each task duration and the overall total.
@@ -499,7 +503,7 @@ Automatic Behaviors:
 2. Context Persistence: Maintain chat context throughout conversation lifecycle.
 3. Lazy Scaffolding: Create `ai-logs/yyyy/mm/dd/<chat-id>/` structure only when the first artifact is generated.
 4. Conversation Export: Auto-save chat transcript to `conversation.md` on artifact creation.
-5. Summary Generation: Auto-generate `summary.md` at session end or on demand with objectives, decisions, and outcomes.
+5. Summary Generation: Auto-generate `summary.md` at chat end or on demand with objectives, decisions, and outcomes.
 6. Metadata Injection: Automatically embed chat ID as `chat_id` and include `ai_log` in all generated files.
 7. Artifact Protection: Refuse to create files without active chat context.
 
@@ -528,7 +532,7 @@ Artifact Creation Process:
 3. Generate Content: Create the requested file/content.
 4. Inject Metadata: Add front matter with `chat_id` and `ai_log`.
 5. Update Logs: Export current conversation to `conversation.md`.
-6. Generate Summary: Create or update `summary.md` with session overview.
+6. Generate Summary: Create or update `summary.md` with chat overview.
 7. Track Artifacts: Add the file path to the chat's artifact list.
 
 ### Error Handling
