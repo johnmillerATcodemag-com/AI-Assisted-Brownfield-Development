@@ -1,0 +1,33 @@
+# GitGuardian configuration file
+# https://docs.gitguardian.com/gitguardian-cli/reference/configuration
+
+# Security scanning exclusions
+paths-ignore:
+  - security-analysis/**
+  - "**/test_vulnerable_code.py"
+  - "**/security_test_*.py"
+  - "**/demo_*_insecure_*.py"
+
+# Ignore patterns for test/demo credentials
+secrets-ignore:
+  - name: "Security Test Files"
+    patterns:
+      - "FAKE-DEMO-*"
+      - "*DEMO CREDENTIAL*"
+      - "security-analysis/test_vulnerable_code.py"
+
+# Custom ignore rules for test files
+ignore-rules:
+  - name: "Ignore test vulnerabilities"
+    pattern: ".*SECURITY_TEST_IGNORE.*"
+    paths:
+      - "security-analysis/**"
+      - "**/*test*vulnerable*.py"
+
+# Minimum entropy for secrets detection (to avoid false positives on test data)
+minimum-entropy: 3.5
+
+# Exclude test/demo API keys that start with FAKE- or contain DEMO
+additional-patterns:
+  - "FAKE-.*-key-.*"
+  - ".*-DEMO-.*"
