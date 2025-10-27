@@ -16,7 +16,7 @@ if (-not (Get-Command gh -ErrorAction SilentlyContinue)) {
 Write-Host "📊 Analyzing current security issue state..." -ForegroundColor Cyan
 
 # Get current open security issues
-$openIssues = gh issue list --label "security" --state open --json number,title,createdAt | ConvertFrom-Json
+$openIssues = gh issue list --label "security" --state open --json number, title, createdAt | ConvertFrom-Json
 
 Write-Host "  🔍 Found $($openIssues.Count) open security issues" -ForegroundColor White
 
@@ -61,7 +61,7 @@ This security issue is being closed as part of an emergency cleanup due to:
 - **Problem**: Scheduled security workflow ran from main branch after local cleanup
 - **Scanner Issues**: Multiple scanners ignore exclusion configurations
   - Semgrep SAST scanner not respecting test file exclusions
-  - Bandit scanner flagging intentionally vulnerable test code  
+  - Bandit scanner flagging intentionally vulnerable test code
   - Custom scanner bypass of SECURITY_TEST_IGNORE markers
 - **Volume**: 26+ new false positives generated automatically
 
@@ -95,22 +95,24 @@ foreach ($issue in $openIssues) {
     try {
         $progress = [math]::Round(($successCount / $openIssues.Count) * 100, 1)
         Write-Host "  📝 Closing issue #$($issue.number): " -NoNewline -ForegroundColor White
-        
+
         # Truncate long titles for display
-        $displayTitle = if ($issue.title.Length -gt 80) { 
-            $issue.title.Substring(0, 80) + "..." 
-        } else { 
-            $issue.title 
+        $displayTitle = if ($issue.title.Length -gt 80) {
+            $issue.title.Substring(0, 80) + "..."
+        }
+        else {
+            $issue.title
         }
         Write-Host $displayTitle -ForegroundColor Gray
-        
+
         # Close the issue with detailed explanation
         $result = gh issue close $issue.number --comment $closeReason 2>&1
-        
+
         if ($LASTEXITCODE -eq 0) {
             Write-Host $result -ForegroundColor Green
             $successCount++
-        } else {
+        }
+        else {
             Write-Host "❌ Failed to close issue #$($issue.number): $result" -ForegroundColor Red
             $failureCount++
         }
@@ -119,11 +121,12 @@ foreach ($issue in $openIssues) {
         if (($successCount + $failureCount) % 10 -eq 0) {
             Write-Host "    📊 Progress: $($successCount + $failureCount)/$($openIssues.Count) closed..." -ForegroundColor Cyan
         }
-        
+
         # Brief pause to avoid API rate limits
         Start-Sleep -Milliseconds 500
-        
-    } catch {
+
+    }
+    catch {
         Write-Host "❌ Exception closing issue #$($issue.number): $($_.Exception.Message)" -ForegroundColor Red
         $failureCount++
     }
