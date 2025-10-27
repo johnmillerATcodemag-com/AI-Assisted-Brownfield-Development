@@ -15,12 +15,12 @@ secrets-ignore:
       - "FAKE-DEMO-*"
       - "*DEMO CREDENTIAL*"
       - "security-analysis/test_vulnerable_code.py"
-    
+
 # Custom ignore rules for test files
 ignore-rules:
   - name: "Ignore test vulnerabilities"
     pattern: ".*SECURITY_TEST_IGNORE.*"
-    paths: 
+    paths:
       - "security-analysis/**"
       - "**/*test*vulnerable*.py"
 

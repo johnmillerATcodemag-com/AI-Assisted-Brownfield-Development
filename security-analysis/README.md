@@ -23,7 +23,7 @@ This directory should be excluded from production security scans. The following 
 
 All test credentials follow these patterns to clearly identify them as non-production:
 
-- Prefixed with `FAKE-DEMO-` 
+- Prefixed with `FAKE-DEMO-`
 - Contain `DEMO CREDENTIAL - NOT REAL` comments
 - Include `SECURITY_TEST_IGNORE:` markers
 - Use obviously fake values like "1234567890abcdef"
@@ -48,7 +48,7 @@ These files are used by:
 ## Important Notes
 
 - ✅ All credentials are fake/demo values
-- ✅ Files are excluded from production security scans  
+- ✅ Files are excluded from production security scans
 - ✅ Clear markers indicate test-only purpose
 - ❌ Never use any values from these files in production
 - ❌ Do not modify to contain real credentials
