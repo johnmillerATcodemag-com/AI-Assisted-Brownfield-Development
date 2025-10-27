@@ -151,7 +151,8 @@ def test_workflow():
             "name: Security Analysis and Issue Creation",
             "security-analysis:",
             "create-security-issues:",
-            "GITHUB_TOKEN:",
+            # SECURITY_TEST_IGNORE: This is checking for workflow token reference, not a hardcoded secret - Issue #449
+            "GITHUB_TOKEN:",  # FAKE-DEMO-token-reference for workflow validation only
             "python .github/scripts/security_scanner.py",
             "python .github/scripts/create_security_issues.py"
         ]

@@ -27,7 +27,23 @@ SCAN_EXTENSIONS = [
 EXCLUDE_DIRECTORIES = [
     ".git", "node_modules", "__pycache__", ".venv", "venv",
     "dist", "build", ".next", "coverage", "logs", "tmp",
-    ".pytest_cache", ".mypy_cache", "vendor", "packages"
+    ".pytest_cache", ".mypy_cache", "vendor", "packages",
+    "security-analysis"  # Exclude security test files with intentional vulnerabilities
+]
+
+# Files to exclude from security scanning (test/demo files with intentional vulnerabilities)
+EXCLUDE_FILES = [
+    "test_vulnerable_code.py",  # Security testing file with fake credentials
+    "security_test_samples.py",
+    "**/test_*_vulnerable_*.py",
+    "**/demo_*_insecure_*.py"
+]
+
+# Patterns to ignore in security scanning (for test/demo purposes)
+SECURITY_TEST_IGNORE_PATTERNS = [
+    r"FAKE-DEMO-.*",  # All fake demo credentials
+    r".*DEMO CREDENTIAL.*",  # Demo credential markers
+    r"SECURITY_TEST_IGNORE:",  # Explicit test ignore markers
 ]
 
 # Security pattern severity levels

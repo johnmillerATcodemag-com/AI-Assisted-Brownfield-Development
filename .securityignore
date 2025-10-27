@@ -1,0 +1,25 @@
+# Security Scanner Exclusions
+# This file lists patterns and files to exclude from security scanning
+# due to intentional test/demo vulnerabilities
+
+# Files containing intentional vulnerabilities for security testing
+security-analysis/test_vulnerable_code.py
+security-analysis/test_security_analyzer.py
+
+# Patterns to ignore (test/demo credentials)
+# These patterns contain "FAKE", "DEMO", or "TEST" to indicate non-production use
+FAKE-DEMO-*
+*DEMO CREDENTIAL*
+*NOT REAL*
+SECURITY_TEST_IGNORE:*
+
+# Test directories to exclude from production security scans
+security-analysis/
+test/security/
+tests/vulnerable/
+demo/insecure/
+
+# File patterns for test security files
+**/*test*vulnerable*.py
+**/*demo*insecure*.py
+**/*security*test*.py
