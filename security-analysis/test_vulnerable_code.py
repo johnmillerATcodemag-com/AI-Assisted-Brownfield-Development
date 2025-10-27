@@ -6,6 +6,11 @@ This file contains intentionally vulnerable code patterns for testing the Securi
 ⚠️  WARNING: This file contains FAKE/TEST credentials and vulnerabilities for demonstration purposes only.
     These are NOT real secrets and should never be used in production systems.
     This file is designed to trigger security scanners to validate the SecurityAnalyzer functionality.
+
+🔍 SECURITY SCANNER NOTE: All credentials in this file are FAKE/DEMO/TEST values.
+   - No real API keys, passwords, or tokens are present
+   - All values are intentionally fabricated for security testing
+   - This file should be excluded from production security scans
 """
 
 import hashlib
@@ -16,9 +21,10 @@ from flask import Flask, render_template_string, request
 
 # Example 1: Hardcoded credentials (HIGH severity - CWE-798)
 # NOTE: These are intentionally fake demo credentials for security analysis demonstration
-API_KEY = "demo-api-key-1234567890abcdef1234567890abcdef"  # DEMO CREDENTIAL
-DATABASE_PASSWORD = "admin123"
-SECRET_TOKEN = "my-super-secret-token-12345"
+# SECURITY_TEST_IGNORE: Demo credentials for vulnerability testing only
+API_KEY = "FAKE-DEMO-api-key-1234567890abcdef1234567890abcdef"  # DEMO CREDENTIAL - NOT REAL
+DATABASE_PASSWORD = "FAKE-DEMO-admin123"  # DEMO CREDENTIAL - NOT REAL
+SECRET_TOKEN = "FAKE-DEMO-my-super-secret-token-12345"  # DEMO CREDENTIAL - NOT REAL
 
 # Example 2: SQL Injection vulnerability (HIGH severity - CWE-89)
 def get_user_data(user_id):
@@ -72,6 +78,7 @@ def fetch_user_data():
 
 def sync_with_external_service():
     # Vulnerable: Insecure connection to external service
+    # SECURITY_TEST_IGNORE: Using fake demo API key for vulnerability testing
     requests.post('http://external-service.com/api/sync', data={'token': API_KEY})
 
 # Example 6: Command injection vulnerability (CRITICAL severity - CWE-78)
@@ -144,16 +151,18 @@ def execute_user_code(code_string):
 
 # Example 11: Additional API key patterns
 # NOTE: These are intentionally fake demo credentials for security analysis demonstration
-STRIPE_API_KEY = "fake-stripe-key-1234567890abcdef1234567890abcdef"  # DEMO CREDENTIAL
-AWS_ACCESS_KEY = "FAKE1234567890ABCDEF"  # DEMO CREDENTIAL
-JWT_SECRET = "demo-jwt-secret-key-very-long-and-secure-hopefully"  # DEMO CREDENTIAL
+# SECURITY_TEST_IGNORE: All API keys below are fake/demo for vulnerability testing only
+STRIPE_API_KEY = "FAKE-DEMO-stripe-key-1234567890abcdef1234567890abcdef"  # DEMO CREDENTIAL - NOT REAL
+AWS_ACCESS_KEY = "FAKE-DEMO-1234567890ABCDEF"  # DEMO CREDENTIAL - NOT REAL
+JWT_SECRET = "FAKE-DEMO-jwt-secret-key-very-long-and-secure-hopefully"  # DEMO CREDENTIAL - NOT REAL
 
 class UserAuthentication:
     def __init__(self):
         # Vulnerable: Hardcoded credentials in class
         # NOTE: These are intentionally fake demo credentials for security analysis demonstration
-        self.admin_password = "admin123456"  # DEMO CREDENTIAL
-        self.service_token = "demo-service-token-abc123def456"  # DEMO CREDENTIAL
+        # SECURITY_TEST_IGNORE: Demo credentials for vulnerability testing only
+        self.admin_password = "FAKE-DEMO-admin123456"  # DEMO CREDENTIAL - NOT REAL
+        self.service_token = "FAKE-DEMO-service-token-abc123def456"  # DEMO CREDENTIAL - NOT REAL
 
     def authenticate_user(self, username, password):
         # Vulnerable: SQL injection in authentication
