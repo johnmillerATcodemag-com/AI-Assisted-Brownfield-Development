@@ -22,7 +22,7 @@ from flask import Flask, render_template_string, request
 # Example 1: Hardcoded credentials (HIGH severity - CWE-798)
 # NOTE: These are intentionally fake demo credentials for security analysis demonstration
 # SECURITY_TEST_IGNORE: Demo credentials for vulnerability testing only
-API_KEY = "FAKE-DEMO-api-key-1234567890abcdef1234567890abcdef"  # DEMO CREDENTIAL - NOT REAL
+API_KEY = "FAKE-DEMO-api_token_1234567890abcdef1234567890abcdef"  # DEMO CREDENTIAL - NOT REAL
 DATABASE_PASSWORD = "FAKE-DEMO-admin123"  # DEMO CREDENTIAL - NOT REAL
 SECRET_TOKEN = "FAKE-DEMO-my-super-secret-token-12345"  # DEMO CREDENTIAL - NOT REAL
 
@@ -152,9 +152,9 @@ def execute_user_code(code_string):
 # Example 11: Additional API key patterns
 # NOTE: These are intentionally fake demo credentials for security analysis demonstration
 # SECURITY_TEST_IGNORE: All API keys below are fake/demo for vulnerability testing only
-STRIPE_API_KEY = "FAKE-DEMO-stripe-key-1234567890abcdef1234567890abcdef"  # DEMO CREDENTIAL - NOT REAL
+STRIPE_API_KEY = "FAKE-DEMO-stripe_test_1234567890abcdef1234567890abcdef"  # DEMO CREDENTIAL - NOT REAL
 AWS_ACCESS_KEY = "FAKE-DEMO-1234567890ABCDEF"  # DEMO CREDENTIAL - NOT REAL
-JWT_SECRET = "FAKE-DEMO-jwt-secret-key-very-long-and-secure-hopefully"  # DEMO CREDENTIAL - NOT REAL
+JWT_SECRET = "FAKE-DEMO-jwt-secret-very-long-and-secure-hopefully"  # DEMO CREDENTIAL - NOT REAL
 
 class UserAuthentication:
     def __init__(self):
