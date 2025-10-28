@@ -50,7 +50,7 @@ source: "<source-identifier>"
 ```markdown
 ---
 ai_generated: true
-model: "openai/gpt-4o@2024-11-20"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 operator: "username"
 chat_id: "unique-id"
 prompt: |

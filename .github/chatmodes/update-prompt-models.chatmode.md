@@ -1,6 +1,6 @@
 ---
 mode: agent
-model: "anthropic/claude-3.5-sonnet-4.5@2024-12-15"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["edit", "read", "search"]
 description: "Updates default model specification in Copilot instructions and provides interactive selection for updating existing prompt files"
 prompt_metadata:
@@ -37,7 +37,7 @@ Updates the default model specification in Copilot instructions to Claude 4.5 an
    ```
    To:
    ```yaml
-   model: "anthropic/claude-3.5-sonnet-4.5@2024-12-15"
+   model: "anthropic/claude-3.5-sonnet@2024-10-22"
    ```
 
 ### Phase 2: Interactive File Selection
@@ -119,7 +119,7 @@ Parse user input and update only selected files:
 model: "anthropic/claude-3.5-sonnet@2024-10-22"
 
 # After
-model: "anthropic/claude-3.5-sonnet-4.5@2024-12-15"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 ```
 
 ### Step 4: Confirmation Summary

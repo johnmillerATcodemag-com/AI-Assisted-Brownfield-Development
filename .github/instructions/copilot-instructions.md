@@ -1,6 +1,6 @@
 ---
 ai_generated: true
-model: "openai/gpt-4o@2024-11-20"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 operator: "johnmillerATcodemag-com"
 chat_id: "prompt-file.instructions-2025-10-15"
 prompt: |
@@ -76,10 +76,10 @@ This document provides comprehensive instructions for GitHub Copilot when workin
 
 ```yaml
 # ✅ Correct approach
-model: "openai/gpt-4o@2024-11-20"  # via GitHub Copilot
+model: "anthropic/claude-3.5-sonnet@2024-10-22"  # via GitHub Copilot
 
 # ❌ Wrong approach
-model: "github/copilot@2025-10-15"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 ```
 
 ### 2. Conversation Log Format
@@ -143,18 +143,22 @@ All AI-generated artifacts must include complete provenance metadata as defined 
 When using GitHub Copilot, follow these specific guidelines:
 
 **Model Field**:
+
 - Use the **underlying AI model** format: `"<provider>/<model-name>@<version>"`
 - Examples: `"openai/gpt-4o@2024-11-20"`, `"anthropic/claude-3.5-sonnet@2024-10-22"`
 - ❌ NOT the interface name like "github/copilot"
 
 **Operator Field**:
+
 - Use your GitHub username (e.g., `"johnmillerATcodemag-com"`)
 
 **Chat ID**:
+
 - Use Copilot's generated chat identifier
 - Copilot should auto-generate this at chat start
 
 **Source Field Values**:
+
 - **User-created**: `"<github-username>"` (e.g., `"johnmillerATcodemag-com"`)
 - **Prompt-generated**: `"<path-to-prompt-file>"` (e.g., `".github/prompts/prompt-file.instructions.prompt.md"`)
 - **Meta-prompt-generated**: `"<path-to-meta-prompt-file>"` (e.g., `".github/prompts/meta/create-instruction-prompt.prompt.md"`)
@@ -176,12 +180,15 @@ GitHub Copilot should automatically:
 ### Quick Reference
 
 **Add to conversation.md**:
+
 ```markdown
 **Artifacts Produced**:
+
 - `<path-to-file>` - <Brief description>
 ```
 
 **Add to README.md** (for notable artifacts):
+
 ```markdown
 - [`.github/instructions/<name>.instructions.md`](...) — <Description> ([chat log](...))
 ```
@@ -307,13 +314,13 @@ Before completing any AI-assisted work:
 ### ❌ Using Interface as Model
 
 ```yaml
-model: "github/copilot@2025-10-15" # WRONG
+model: "anthropic/claude-3.5-sonnet@2024-10-22" # WRONG
 ```
 
 **Fix**: Use underlying model
 
 ```yaml
-model: "openai/gpt-4o@2024-11-20" # CORRECT
+model: "anthropic/claude-3.5-sonnet@2024-10-22" # CORRECT
 ```
 
 ### ❌ Using "USER" in Conversation Logs

@@ -86,7 +86,7 @@ The real conflict was:
 model: "anthropic/claude-3.5-sonnet@2024-10-22"  # Default per copilot-instructions.md
 
 # In generated output metadata - MUST use explicit model
-model: "openai/gpt-4o@2024-11-20"  # Actual model that generated the artifact
+model: "anthropic/claude-3.5-sonnet@2024-10-22"  # Actual model that generated the artifact
 
 # ❌ NEVER acceptable anywhere
 # model: Auto (copilot)  # Loses provenance tracking
@@ -129,7 +129,7 @@ model: "openai/gpt-4o@2024-11-20"  # Actual model that generated the artifact
 The `create-prompt.instructions.md` file metadata shows:
 
 ```yaml
-model: "github/copilot@2025-10-15" # Line 3
+model: "anthropic/claude-3.5-sonnet@2024-10-22" # Line 3
 ```
 
 However, this violates the repository's own standards as documented in `copilot-instructions.md`:
@@ -155,10 +155,10 @@ The file was generated before `copilot-instructions.md` standardized the model f
 
 ```yaml
 # Current (WRONG)
-model: "github/copilot@2025-10-15"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 
 # Corrected
-model: "openai/gpt-4o@2024-11-20"  # or actual model used
+model: "anthropic/claude-3.5-sonnet@2024-10-22"  # or actual model used
 # Generated via GitHub Copilot
 ```
 
@@ -599,7 +599,7 @@ The original conflict was actually that BOTH contexts require explicit format:
 **Changes**:
 
 - Fixed YAML front matter metadata
-- Changed `model: "github/copilot@2025-10-15"` → `model: "openai/gpt-4o@2024-11-20"`
+- Changed `model: "anthropic/claude-3.5-sonnet@2024-10-22"` → `model: "anthropic/claude-3.5-sonnet@2024-10-22"`
 - Added `source: ".github/prompts/prompt-file.instructions.prompt.md"`
 
 **Impact**: File now complies with its own standards

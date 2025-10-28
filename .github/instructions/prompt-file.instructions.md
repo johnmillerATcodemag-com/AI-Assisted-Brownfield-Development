@@ -1,6 +1,6 @@
 ---
 ai_generated: true
-model: "openai/gpt-4o@2024-11-20" # Corrected from "github/copilot@2025-10-15"
+model: "anthropic/claude-3.5-sonnet@2024-10-22" # Corrected from "github/copilot@2025-10-15"
 operator: "johnmillerATcodemag-com"
 chat_id: "prompt-file.instructions-2025-10-15"
 prompt: |
@@ -146,7 +146,7 @@ mode: chat   # Interactive Q&A session
 model: "anthropic/claude-3.5-sonnet@2024-10-22"  # Recommended default
 
 # Alternative if you know you're using GPT-4o
-model: "openai/gpt-4o@2024-11-20"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 
 # For reasoning tasks with o1
 model: "openai/o1@2024-12-17"
@@ -1639,6 +1639,7 @@ Add to `ai-logs/<yyyy>/<mm>/<dd>/<chat-id>/conversation.md`:
 
 ```markdown
 **Artifacts Produced**:
+
 - `.github/prompts/<path>/<filename>.prompt.md` - <Brief description of what the prompt does>
 ```
 

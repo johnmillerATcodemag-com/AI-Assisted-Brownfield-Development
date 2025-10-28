@@ -1,6 +1,6 @@
 ---
 mode: agent
-model: Auto (copilot)
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["search", "edit", "create"]
 description: "Update application documentation to include current-state details and Mermaid C4 diagrams"
 

@@ -91,7 +91,7 @@ model: "anthropic/claude-3.5-sonnet@2024-10-22"  # Recommended default
 **Verification**:
 The instruction file metadata now correctly shows:
 ```yaml
-model: "openai/gpt-4o@2024-11-20"  # Actual underlying model
+model: "anthropic/claude-3.5-sonnet@2024-10-22"  # Actual underlying model
 # Not: "github/copilot@2025-10-15"  # Was interface, not model
 ```
 

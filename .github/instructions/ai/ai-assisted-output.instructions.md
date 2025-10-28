@@ -1,6 +1,6 @@
 ---
 ai_generated: true
-model: "openai/gpt-4o@2024-11-20"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 operator: "johnmillerATcodemag-com"
 chat_id: "ai-assisted-output-policy-2025-10-15"
 prompt: |
@@ -397,7 +397,7 @@ Example Markdown file with front matter:
 ```markdown
 ---
 ai_generated: true
-model: "openai/gpt-4@2024-05-13"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 operator: "john-doe"
 chat_id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 prompt: |

@@ -1,6 +1,6 @@
 ---
 ai_generated: true
-model: "openai/gpt-4o@unknown"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 operator: "johnmillerATcodemag-com"
 chat_id: "create-marp-slides-instructions-<timestamp>"
 prompt: |
@@ -74,7 +74,7 @@ After the front matter, add Marp directives and slide content. Minimal example:
 ```markdown
 ---
 ai_generated: true
-model: "openai/gpt-4o@2024-11-20"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 operator: "john-doe"
 chat_id: "a1b2c3d4"
 prompt: |

@@ -1,6 +1,6 @@
 ---
 mode: agent
-model: "Auto (copilot)"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 tools: ["search", "edit", "create"]
 description: "Update application documentation with current-state details and Mermaid C4 diagrams"
 title: "Docs: Update application overview with Mermaid C4 diagrams"
@@ -10,6 +10,7 @@ labels: [documentation, architecture, diagram]
 Update application documentation to include current-state details and Mermaid C4 diagrams.
 
 ## Scope
+
 - Audit repo for current state (features, services, workflows)
 - Update README.md or create /docs/overview.md with:
   - Executive summary of system
@@ -21,6 +22,7 @@ Update application documentation to include current-state details and Mermaid C4
   - Optional: C4 Component (C3) for critical service
 
 ## Acceptance Criteria
+
 - README.md/docs/overview.md contains:
   - Accurate current app state description
   - At least one Mermaid C1 and C2 diagram
@@ -29,6 +31,7 @@ Update application documentation to include current-state details and Mermaid C4
 - Assumptions/unknowns called out with TODOs
 
 ## Example Stubs
+
 ```mermaid
 %% C4 Context (C1)
 C4Context
@@ -56,5 +59,6 @@ C4Container
 ```
 
 ## Notes
+
 - Multiple services: include per-service sections, repeat C2 as needed
 - Keep diagrams small, focused; link to deeper C3/C4 as architecture evolves

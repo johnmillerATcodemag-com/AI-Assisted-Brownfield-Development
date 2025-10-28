@@ -156,7 +156,7 @@ started: 2025-10-15T14:00:00Z
 ended: 2025-10-15T14:45:00Z
 total_duration: 00:45:00
 operator: johnmillerATcodemag-com
-model: openai/gpt-4o@2024-11-20
+model: anthropic/claude-3.5-sonnet@2024-10-22
 artifacts_count: 7
 files_modified: 10
 governance_layers: 4

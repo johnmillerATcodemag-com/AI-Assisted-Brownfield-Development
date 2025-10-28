@@ -258,7 +258,7 @@ Provide a brief filled example showing a Markdown file with front matter, and a 
 ```markdown
 ---
 ai_generated: true
-model: "openai/gpt-4@2024-05-13"
+model: "anthropic/claude-3.5-sonnet@2024-10-22"
 operator: "john-doe"
 prompt: |
   Create a user registration flow diagram showing the complete process
